@@ -14,7 +14,20 @@ namespace inventor_manager
 
         private void BtnSearch_Click(object sender, EventArgs e)
         {
-            LstViewDataProductos.Items.Add(TxtSearchName.Text);
+            if(!(TxtAddName.Text == "")&&!(TxtPrice.Text == "") && !(TxtQuanity.Text == "") && !(TxtMark.Text == ""))
+            {
+                ListViewItem NewItemLstData = new ListViewItem(TxtAddName.Text);
+                LstViewDataProductos.Items.Add(NewItemLstData);
+                NewItemLstData.SubItems.Add(TxtPrice.Text);
+                NewItemLstData.SubItems.Add(TxtQuanity.Text);
+                NewItemLstData.SubItems.Add(TxtMark.Text);
+            }
+            else
+            {
+                MessageBox.Show("Todos los campos deven estar llenos para poder ingresar");
+            }
+           
+
         }
     }
 }

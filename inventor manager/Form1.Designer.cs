@@ -28,48 +28,57 @@
         /// </summary>
         private void InitializeComponent()
         {
-            BtnSearch = new Button();
-            TxtSearchName = new TextBox();
+            BtnAdd = new Button();
+            TxtAddName = new TextBox();
             LblName = new Label();
             LstViewDataProductos = new ListView();
             columnHeader1 = new ColumnHeader();
             Price = new ColumnHeader();
             columnHeader2 = new ColumnHeader();
             columnHeader3 = new ColumnHeader();
+            label1 = new Label();
+            TxtPrice = new TextBox();
+            label2 = new Label();
+            TxtQuanity = new TextBox();
+            label3 = new Label();
+            TxtMark = new TextBox();
             SuspendLayout();
             // 
-            // BtnSearch
+            // BtnAdd
             // 
-            BtnSearch.Location = new Point(294, 12);
-            BtnSearch.Name = "BtnSearch";
-            BtnSearch.Size = new Size(89, 33);
-            BtnSearch.TabIndex = 0;
-            BtnSearch.Text = "Search";
-            BtnSearch.UseVisualStyleBackColor = true;
-            BtnSearch.Click += BtnSearch_Click;
+            BtnAdd.Location = new Point(380, 161);
+            BtnAdd.Margin = new Padding(3, 4, 3, 4);
+            BtnAdd.Name = "BtnAdd";
+            BtnAdd.Size = new Size(102, 44);
+            BtnAdd.TabIndex = 0;
+            BtnAdd.Text = "Add";
+            BtnAdd.UseVisualStyleBackColor = true;
+            BtnAdd.Click += BtnSearch_Click;
             // 
-            // TxtSearchName
+            // TxtAddName
             // 
-            TxtSearchName.Location = new Point(153, 18);
-            TxtSearchName.Name = "TxtSearchName";
-            TxtSearchName.Size = new Size(133, 23);
-            TxtSearchName.TabIndex = 1;
+            TxtAddName.Location = new Point(188, 28);
+            TxtAddName.Margin = new Padding(3, 4, 3, 4);
+            TxtAddName.Name = "TxtAddName";
+            TxtAddName.Size = new Size(151, 27);
+            TxtAddName.TabIndex = 1;
             // 
             // LblName
             // 
             LblName.AutoSize = true;
-            LblName.Location = new Point(22, 21);
+            LblName.Location = new Point(25, 28);
             LblName.Name = "LblName";
-            LblName.Size = new Size(125, 15);
+            LblName.Size = new Size(157, 20);
             LblName.TabIndex = 2;
             LblName.Text = "Name of the producto";
             // 
             // LstViewDataProductos
             // 
             LstViewDataProductos.Columns.AddRange(new ColumnHeader[] { columnHeader1, Price, columnHeader2, columnHeader3 });
-            LstViewDataProductos.Location = new Point(660, 12);
+            LstViewDataProductos.Location = new Point(754, 16);
+            LstViewDataProductos.Margin = new Padding(3, 4, 3, 4);
             LstViewDataProductos.Name = "LstViewDataProductos";
-            LstViewDataProductos.Size = new Size(485, 486);
+            LstViewDataProductos.Size = new Size(554, 647);
             LstViewDataProductos.TabIndex = 3;
             LstViewDataProductos.UseCompatibleStateImageBehavior = false;
             LstViewDataProductos.View = View.Details;
@@ -81,6 +90,7 @@
             // 
             // Price
             // 
+            Price.Tag = "";
             Price.Text = "Price";
             Price.TextAlign = HorizontalAlignment.Center;
             Price.Width = 120;
@@ -89,7 +99,7 @@
             // 
             columnHeader2.Text = "Available quantity";
             columnHeader2.TextAlign = HorizontalAlignment.Center;
-            columnHeader2.Width = 120;
+            columnHeader2.Width = 140;
             // 
             // columnHeader3
             // 
@@ -97,15 +107,73 @@
             columnHeader3.TextAlign = HorizontalAlignment.Center;
             columnHeader3.Width = 120;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(25, 78);
+            label1.Name = "label1";
+            label1.Size = new Size(149, 20);
+            label1.TabIndex = 5;
+            label1.Text = "Price of the producto";
+            // 
+            // TxtPrice
+            // 
+            TxtPrice.Location = new Point(188, 78);
+            TxtPrice.Margin = new Padding(3, 4, 3, 4);
+            TxtPrice.Name = "TxtPrice";
+            TxtPrice.Size = new Size(151, 27);
+            TxtPrice.TabIndex = 4;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(25, 123);
+            label2.Name = "label2";
+            label2.Size = new Size(65, 20);
+            label2.TabIndex = 7;
+            label2.Text = "Quantity";
+            // 
+            // TxtQuanity
+            // 
+            TxtQuanity.Location = new Point(188, 123);
+            TxtQuanity.Margin = new Padding(3, 4, 3, 4);
+            TxtQuanity.Name = "TxtQuanity";
+            TxtQuanity.Size = new Size(151, 27);
+            TxtQuanity.TabIndex = 6;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(25, 173);
+            label3.Name = "label3";
+            label3.Size = new Size(42, 20);
+            label3.TabIndex = 9;
+            label3.Text = "Mark";
+            // 
+            // TxtMark
+            // 
+            TxtMark.Location = new Point(188, 173);
+            TxtMark.Margin = new Padding(3, 4, 3, 4);
+            TxtMark.Name = "TxtMark";
+            TxtMark.Size = new Size(151, 27);
+            TxtMark.TabIndex = 8;
+            // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1157, 545);
+            ClientSize = new Size(1322, 727);
+            Controls.Add(label3);
+            Controls.Add(TxtMark);
+            Controls.Add(label2);
+            Controls.Add(TxtQuanity);
+            Controls.Add(label1);
+            Controls.Add(TxtPrice);
             Controls.Add(LstViewDataProductos);
             Controls.Add(LblName);
-            Controls.Add(TxtSearchName);
-            Controls.Add(BtnSearch);
+            Controls.Add(TxtAddName);
+            Controls.Add(BtnAdd);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "Form1";
             Text = "Form1";
             ResumeLayout(false);
@@ -114,13 +182,19 @@
 
         #endregion
 
-        private Button BtnSearch;
-        private TextBox TxtSearchName;
+        private Button BtnAdd;
+        private TextBox TxtAddName;
         private Label LblName;
         private ListView LstViewDataProductos;
         private ColumnHeader columnHeader1;
         private ColumnHeader Price;
         private ColumnHeader columnHeader2;
         private ColumnHeader columnHeader3;
+        private Label label1;
+        private TextBox TxtPrice;
+        private Label label2;
+        private TextBox TxtQuanity;
+        private Label label3;
+        private TextBox TxtMark;
     }
 }
