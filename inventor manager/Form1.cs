@@ -18,9 +18,10 @@ namespace inventor_manager
             {
                 ListViewItem NewItemLstData = new ListViewItem(TxtAddName.Text);
                 LstViewDataProductos.Items.Add(NewItemLstData);
-                NewItemLstData.SubItems.Add(TxtPrice.Text);
-                NewItemLstData.SubItems.Add(TxtQuanity.Text);
-                NewItemLstData.SubItems.Add(TxtMark.Text);
+
+                Producto producto = new Producto(TxtPrice.Text, TxtQuanity.Text, TxtMark.Text);
+
+                NewItemLstData.SubItems.Add(producto.ToString());
             }
             else
             {

@@ -14,7 +14,8 @@ namespace inventor_manager
     public partial class Inicio : Form
     {
         int i = 0;
-        string url_data_employee = "C:\\Users\\1gren\\Documents\\archivos_R\\Cuentas_Nombres.text";
+        int x = 1;
+        string url_data_employee = "C:\\Users\\1gren\\Documents\\archivos_R\\Cuentas_Nombres.txt";
         public Inicio()
         {
             InitializeComponent();
@@ -22,27 +23,41 @@ namespace inventor_manager
 
         private void BtnLogin_Click(object sender, EventArgs e)
         {
-            try
-            {
-                string[] Data_Emply = File.ReadAllLines(url_data_employee);
-                foreach (string Email in Data_Emply)
-                {
-                    while (Email == Data_Emply[1])
-                    {
-                        break;
-                    }
-                    i++;
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error al leer el archivo: " + ex.Message);
-            }
-        }
 
-        private void PicturEmplayPhoto_Click(object sender, EventArgs e)
-        {
-            
+            if (File.Exists(url_data_employee))
+            {
+                string[] Data = File.ReadAllLines(url_data_employee);
+                foreach (string line in Data)
+                {
+                    string[] lines_data = line.Split( ) ;
+                    
+                    string Information_login = TxtEmail.Text + " " + TxtPasword.Text;
+
+
+                    if (lines_data.Length >= 2 && lines_data[0].Trim() == TxtEmail.Text && lines_data[1].Trim() == TxtPasword.Text)
+                    {
+                        Form1 form1 = new Form1();
+                        form1.Show();
+                    }
+                    else
+                    {
+                        MessageBox.Show("El correo o la contraseña no existen porfavor intetne denuevo", "Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        i++;
+                        X++;
+                    }
+                    return;
+                }
+
+              
+                
+
+            }
+            else
+            {
+                MessageBox.Show("El texto no se encontró en el archivo.", "Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+
         }
 
         private void BtnUploadImage_Click(object sender, EventArgs e)

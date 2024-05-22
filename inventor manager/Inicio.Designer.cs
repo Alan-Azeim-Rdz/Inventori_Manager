@@ -92,7 +92,6 @@
             PicturEmplayPhoto.SizeMode = PictureBoxSizeMode.Zoom;
             PicturEmplayPhoto.TabIndex = 5;
             PicturEmplayPhoto.TabStop = false;
-            PicturEmplayPhoto.Click += PicturEmplayPhoto_Click;
             // 
             // BtnRegister
             // 
