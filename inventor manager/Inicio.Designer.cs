@@ -41,9 +41,10 @@
             // 
             // BtnLogin
             // 
-            BtnLogin.Location = new Point(280, 269);
+            BtnLogin.Location = new Point(245, 202);
+            BtnLogin.Margin = new Padding(3, 2, 3, 2);
             BtnLogin.Name = "BtnLogin";
-            BtnLogin.Size = new Size(94, 29);
+            BtnLogin.Size = new Size(82, 22);
             BtnLogin.TabIndex = 0;
             BtnLogin.Text = "Login";
             BtnLogin.UseVisualStyleBackColor = true;
@@ -52,33 +53,35 @@
             // LblPasword
             // 
             LblPasword.AutoSize = true;
-            LblPasword.Location = new Point(184, 183);
+            LblPasword.Location = new Point(161, 137);
             LblPasword.Name = "LblPasword";
-            LblPasword.Size = new Size(64, 20);
+            LblPasword.Size = new Size(52, 15);
             LblPasword.TabIndex = 1;
             LblPasword.Text = "Pasword";
             // 
             // LblEmail
             // 
             LblEmail.AutoSize = true;
-            LblEmail.Location = new Point(184, 125);
+            LblEmail.Location = new Point(161, 94);
             LblEmail.Name = "LblEmail";
-            LblEmail.Size = new Size(46, 20);
+            LblEmail.Size = new Size(36, 15);
             LblEmail.TabIndex = 2;
             LblEmail.Text = "Email";
             // 
             // TxtPasword
             // 
-            TxtPasword.Location = new Point(280, 180);
+            TxtPasword.Location = new Point(245, 135);
+            TxtPasword.Margin = new Padding(3, 2, 3, 2);
             TxtPasword.Name = "TxtPasword";
-            TxtPasword.Size = new Size(243, 27);
+            TxtPasword.Size = new Size(213, 23);
             TxtPasword.TabIndex = 3;
             // 
             // TxtEmail
             // 
-            TxtEmail.Location = new Point(280, 122);
+            TxtEmail.Location = new Point(245, 92);
+            TxtEmail.Margin = new Padding(3, 2, 3, 2);
             TxtEmail.Name = "TxtEmail";
-            TxtEmail.Size = new Size(243, 27);
+            TxtEmail.Size = new Size(213, 23);
             TxtEmail.TabIndex = 4;
             // 
             // PicturEmplayPhoto
@@ -86,27 +89,31 @@
             PicturEmplayPhoto.AccessibleRole = AccessibleRole.Cursor;
             PicturEmplayPhoto.BackColor = Color.Cyan;
             PicturEmplayPhoto.Image = Properties.Resources._6073873;
-            PicturEmplayPhoto.Location = new Point(611, 42);
+            PicturEmplayPhoto.Location = new Point(535, 32);
+            PicturEmplayPhoto.Margin = new Padding(3, 2, 3, 2);
             PicturEmplayPhoto.Name = "PicturEmplayPhoto";
-            PicturEmplayPhoto.Size = new Size(232, 256);
+            PicturEmplayPhoto.Size = new Size(203, 192);
             PicturEmplayPhoto.SizeMode = PictureBoxSizeMode.Zoom;
             PicturEmplayPhoto.TabIndex = 5;
             PicturEmplayPhoto.TabStop = false;
             // 
             // BtnRegister
             // 
-            BtnRegister.Location = new Point(429, 269);
+            BtnRegister.Location = new Point(375, 202);
+            BtnRegister.Margin = new Padding(3, 2, 3, 2);
             BtnRegister.Name = "BtnRegister";
-            BtnRegister.Size = new Size(94, 29);
+            BtnRegister.Size = new Size(82, 22);
             BtnRegister.TabIndex = 6;
             BtnRegister.Text = "Register";
             BtnRegister.UseVisualStyleBackColor = true;
+            BtnRegister.Click += BtnRegister_Click;
             // 
             // BtnUploadImage
             // 
-            BtnUploadImage.Location = new Point(652, 324);
+            BtnUploadImage.Location = new Point(570, 243);
+            BtnUploadImage.Margin = new Padding(3, 2, 3, 2);
             BtnUploadImage.Name = "BtnUploadImage";
-            BtnUploadImage.Size = new Size(160, 29);
+            BtnUploadImage.Size = new Size(140, 22);
             BtnUploadImage.TabIndex = 7;
             BtnUploadImage.Text = "upload image";
             BtnUploadImage.UseVisualStyleBackColor = true;
@@ -114,9 +121,9 @@
             // 
             // Inicio
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(987, 392);
+            ClientSize = new Size(864, 294);
             Controls.Add(BtnUploadImage);
             Controls.Add(BtnRegister);
             Controls.Add(PicturEmplayPhoto);
@@ -125,6 +132,7 @@
             Controls.Add(LblEmail);
             Controls.Add(LblPasword);
             Controls.Add(BtnLogin);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "Inicio";
             Text = "Inicio";
             ((System.ComponentModel.ISupportInitialize)PicturEmplayPhoto).EndInit();

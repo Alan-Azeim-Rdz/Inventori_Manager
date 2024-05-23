@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DocumentFormat.OpenXml.Drawing;
+using DocumentFormat.OpenXml.Vml;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,12 +15,13 @@ namespace inventor_manager
 {
     public partial class Inicio : Form
     {
+
         int i = 0;
-        int x = 1;
         string url_data_employee = "C:\\Users\\1gren\\Documents\\archivos_R\\Cuentas_Nombres.txt";
         public Inicio()
         {
             InitializeComponent();
+
         }
 
         private void BtnLogin_Click(object sender, EventArgs e)
@@ -27,29 +30,24 @@ namespace inventor_manager
             if (File.Exists(url_data_employee))
             {
                 string[] Data = File.ReadAllLines(url_data_employee);
-                foreach (string line in Data)
+
+                string Information_login = TxtEmail.Text + " " + TxtPasword.Text;
+                for (int i = 0; i < Data.Length; i++)
                 {
-                    string[] lines_data = line.Split( ) ;
-                    
-                    string Information_login = TxtEmail.Text + " " + TxtPasword.Text;
-
-
-                    if (lines_data.Length >= 2 && lines_data[0].Trim() == TxtEmail.Text && lines_data[1].Trim() == TxtPasword.Text)
+                    if (Data[i] == Information_login)
                     {
                         Form1 form1 = new Form1();
                         form1.Show();
+                        break;
                     }
-                    else
+                    if (i == Data.Length - 1)
                     {
-                        MessageBox.Show("El correo o la contraseña no existen porfavor intetne denuevo", "Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        i++;
-                        X++;
+                        MessageBox.Show("El correo o la contraseña no existen, porfavor revicelo");
+                        break;
                     }
-                    return;
                 }
 
-              
-                
+
 
             }
             else
@@ -82,6 +80,14 @@ namespace inventor_manager
                 // Handle potential exceptions like invalid file format or path issues
                 MessageBox.Show("Error loading image: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void BtnRegister_Click(object sender, EventArgs e)
+        {
+            string Information_login = TxtEmail.Text + " " + TxtPasword.Text;
+
+
+
         }
     }
 }
