@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 
 namespace inventor_manager
 {
-    internal class Producto
+    internal class Product
     {
-        protected string _price;
-        protected string _quantity;
+        protected int _price;
+        protected int _quantity;
         protected string _mark;
 
-        public string Price
+        public int Price
         {
             get { return _price; }
             set { _price = value; }
         }
-        public string Quantity
+        public int Quantity
         {
             get { return _quantity; }
             set { _quantity = value; }
@@ -29,14 +29,14 @@ namespace inventor_manager
             set { _mark = value; }
         }
 
-        public Producto()
+        public Product()
         {
-            _price = "";
-            _quantity = "";
+            _price = 0;
+            _quantity = 0;
             _mark = "";
         }
 
-        public Producto(string price, string quantity, string mark)
+        public Product(int price, int quantity, string mark)
         {
            _price = price;
            _quantity = quantity;

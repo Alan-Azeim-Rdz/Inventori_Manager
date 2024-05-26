@@ -1,6 +1,6 @@
 ﻿namespace inventor_manager
 {
-    partial class Form1
+    partial class Add_nventory
     {
         /// <summary>
         ///  Required designer variable.
@@ -42,14 +42,15 @@
             TxtQuanity = new TextBox();
             label3 = new Label();
             TxtMark = new TextBox();
+            PicturUser = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)PicturUser).BeginInit();
             SuspendLayout();
             // 
             // BtnAdd
             // 
-            BtnAdd.Location = new Point(380, 161);
-            BtnAdd.Margin = new Padding(3, 4, 3, 4);
+            BtnAdd.Location = new Point(329, 171);
             BtnAdd.Name = "BtnAdd";
-            BtnAdd.Size = new Size(102, 44);
+            BtnAdd.Size = new Size(89, 33);
             BtnAdd.TabIndex = 0;
             BtnAdd.Text = "Add";
             BtnAdd.UseVisualStyleBackColor = true;
@@ -57,28 +58,26 @@
             // 
             // TxtAddName
             // 
-            TxtAddName.Location = new Point(188, 28);
-            TxtAddName.Margin = new Padding(3, 4, 3, 4);
+            TxtAddName.Location = new Point(161, 71);
             TxtAddName.Name = "TxtAddName";
-            TxtAddName.Size = new Size(151, 27);
+            TxtAddName.Size = new Size(133, 23);
             TxtAddName.TabIndex = 1;
             // 
             // LblName
             // 
             LblName.AutoSize = true;
-            LblName.Location = new Point(25, 28);
+            LblName.Location = new Point(19, 71);
             LblName.Name = "LblName";
-            LblName.Size = new Size(157, 20);
+            LblName.Size = new Size(125, 15);
             LblName.TabIndex = 2;
             LblName.Text = "Name of the producto";
             // 
             // LstViewDataProductos
             // 
             LstViewDataProductos.Columns.AddRange(new ColumnHeader[] { columnHeader1, Price, columnHeader2, columnHeader3 });
-            LstViewDataProductos.Location = new Point(754, 16);
-            LstViewDataProductos.Margin = new Padding(3, 4, 3, 4);
+            LstViewDataProductos.Location = new Point(640, 12);
             LstViewDataProductos.Name = "LstViewDataProductos";
-            LstViewDataProductos.Size = new Size(554, 647);
+            LstViewDataProductos.Size = new Size(505, 486);
             LstViewDataProductos.TabIndex = 3;
             LstViewDataProductos.UseCompatibleStateImageBehavior = false;
             LstViewDataProductos.View = View.Details;
@@ -110,59 +109,66 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(25, 78);
+            label1.Location = new Point(19, 108);
             label1.Name = "label1";
-            label1.Size = new Size(149, 20);
+            label1.Size = new Size(119, 15);
             label1.TabIndex = 5;
             label1.Text = "Price of the producto";
             // 
             // TxtPrice
             // 
-            TxtPrice.Location = new Point(188, 78);
-            TxtPrice.Margin = new Padding(3, 4, 3, 4);
+            TxtPrice.Location = new Point(161, 108);
             TxtPrice.Name = "TxtPrice";
-            TxtPrice.Size = new Size(151, 27);
+            TxtPrice.Size = new Size(133, 23);
             TxtPrice.TabIndex = 4;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(25, 123);
+            label2.Location = new Point(19, 142);
             label2.Name = "label2";
-            label2.Size = new Size(65, 20);
+            label2.Size = new Size(53, 15);
             label2.TabIndex = 7;
             label2.Text = "Quantity";
             // 
             // TxtQuanity
             // 
-            TxtQuanity.Location = new Point(188, 123);
-            TxtQuanity.Margin = new Padding(3, 4, 3, 4);
+            TxtQuanity.Location = new Point(161, 142);
             TxtQuanity.Name = "TxtQuanity";
-            TxtQuanity.Size = new Size(151, 27);
+            TxtQuanity.Size = new Size(133, 23);
             TxtQuanity.TabIndex = 6;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(25, 173);
+            label3.Location = new Point(19, 180);
             label3.Name = "label3";
-            label3.Size = new Size(42, 20);
+            label3.Size = new Size(34, 15);
             label3.TabIndex = 9;
             label3.Text = "Mark";
             // 
             // TxtMark
             // 
-            TxtMark.Location = new Point(188, 173);
-            TxtMark.Margin = new Padding(3, 4, 3, 4);
+            TxtMark.Location = new Point(161, 180);
             TxtMark.Name = "TxtMark";
-            TxtMark.Size = new Size(151, 27);
+            TxtMark.Size = new Size(133, 23);
             TxtMark.TabIndex = 8;
             // 
-            // Form1
+            // PicturUser
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            PicturUser.Location = new Point(21, 12);
+            PicturUser.Name = "PicturUser";
+            PicturUser.Size = new Size(53, 50);
+            PicturUser.SizeMode = PictureBoxSizeMode.StretchImage;
+            PicturUser.TabIndex = 10;
+            PicturUser.TabStop = false;
+            // 
+            // Add_nventory
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1322, 727);
+            ClientSize = new Size(1157, 545);
+            Controls.Add(PicturUser);
             Controls.Add(label3);
             Controls.Add(TxtMark);
             Controls.Add(label2);
@@ -173,9 +179,9 @@
             Controls.Add(LblName);
             Controls.Add(TxtAddName);
             Controls.Add(BtnAdd);
-            Margin = new Padding(3, 4, 3, 4);
-            Name = "Form1";
+            Name = "Add_nventory";
             Text = "Form1";
+            ((System.ComponentModel.ISupportInitialize)PicturUser).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -196,5 +202,6 @@
         private TextBox TxtQuanity;
         private Label label3;
         private TextBox TxtMark;
+        private PictureBox PicturUser;
     }
 }

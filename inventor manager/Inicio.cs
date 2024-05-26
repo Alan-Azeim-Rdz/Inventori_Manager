@@ -36,8 +36,9 @@ namespace inventor_manager
                 {
                     if (Data[i] == Information_login)
                     {
-                        Form1 form1 = new Form1();
+                        Add_nventory form1 = new Add_nventory();
                         form1.Show();
+                        form1.ReceivedImage = PicturEmplayPhoto.Image;
                         break;
                     }
                     if (i == Data.Length - 1)
@@ -46,8 +47,6 @@ namespace inventor_manager
                         break;
                     }
                 }
-
-
 
             }
             else
