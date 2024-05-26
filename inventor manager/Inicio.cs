@@ -15,7 +15,7 @@ namespace inventor_manager
 {
     public partial class Inicio : Form
     {
-
+        string Photo = string.Empty;
         int i = 0;
         string url_data_employee = "C:\\Users\\1gren\\Documents\\archivos_R\\Cuentas_Nombres.txt";
         public Inicio()
@@ -36,9 +36,9 @@ namespace inventor_manager
                 {
                     if (Data[i] == Information_login)
                     {
-                        Add_nventory form1 = new Add_nventory();
-                        form1.Show();
-                        form1.ReceivedImage = PicturEmplayPhoto.Image;
+                        menu menu = new menu();
+                        menu.Show();
+                        menu.ReceivedImage = PicturEmplayPhoto.Image;
                         break;
                     }
                     if (i == Data.Length - 1)
@@ -68,11 +68,11 @@ namespace inventor_manager
             {
                 return;  // User canceled the file selection dialog
             }
-
             try
             {
                 // Load the image using a try-catch block for error handling
                 PicturEmplayPhoto.Image = Image.FromFile(Images.FileName);
+                Photo = Images.FileName;
             }
             catch (Exception ex)
             {
@@ -83,8 +83,48 @@ namespace inventor_manager
 
         private void BtnRegister_Click(object sender, EventArgs e)
         {
+            SaveFileDialog dialog = new SaveFileDialog();
+
             string Information_login = TxtEmail.Text + " " + TxtPasword.Text;
 
+            if (File.Exists(url_data_employee))
+            {
+                string[] Data = File.ReadAllLines(url_data_employee);
+
+                for (int i = 0; i < Data.Length; i++)
+                {
+                    if (Data[i] == Information_login)
+                    {
+                         MessageBox.Show("El correo o la contraseña ya existen");
+                        break;
+                    }
+                    if (i == Data.Length - 1)
+                    {
+                        try
+                        {
+
+                            // Escribe el texto en el archivo en la ruta predefinida
+                            File.AppendAllText(url_data_employee, Information_login + Environment.NewLine);
+
+                            // Notificación de éxito
+                            MessageBox.Show("Datos guardados exitosamente " , "Information_login", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        catch (Exception ex)
+                        {
+                            // Manejo de errores
+                            MessageBox.Show("Error al guardar el archivo: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                       
+                    }
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("El texto no se encontró en el archivo.", "Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+           
 
 
         }

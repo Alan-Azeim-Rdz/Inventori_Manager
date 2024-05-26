@@ -9,20 +9,20 @@ namespace inventor_manager
     public partial class Add_nventory : Form
     {
         string Url_exel_productos = "C:\\Users\\1gren\\Documents\\prductos.xlsx";
+        string Url_txt_productos = "C:\\Users\\1gren\\Documents\\archivos_R\\datos.txt";
         public Add_nventory()
         {
             InitializeComponent();
 
-
         }
-        private Image _receivedImage;
+        private Image receivedImage;
         public Image ReceivedImage
         {
-            get { return _receivedImage; }
+            get { return receivedImage; }
             set
             {
-                _receivedImage = value;
-               PicturUser.Image = _receivedImage;
+                receivedImage = value;
+               PicturUser.Image = receivedImage;
             }
         }
 
@@ -42,6 +42,20 @@ namespace inventor_manager
                     NewItemLstData.SubItems.Add(Convert.ToString(producto.Price));
                     NewItemLstData.SubItems.Add(Convert.ToString(producto.Quantity));
                     NewItemLstData.SubItems.Add(producto.Mark);
+
+                    string product_for_txt = TxtAddName.Text + " " + producto.ToString() + " \n ";
+                    try
+                    {
+                        // Escribe el contenido en el archivo especificado
+                        File.AppendAllText(Url_txt_productos, product_for_txt + Environment.NewLine);
+
+                        Console.WriteLine("El archivo se ha guardado correctamente en: " + product_for_txt);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("Error al guardar el archivo: " + ex.Message);
+                    }
+
                 }
                 catch (System.InvalidCastException) 
                 {
@@ -55,11 +69,6 @@ namespace inventor_manager
                     MessageBox.Show("alguno de los datos enviados esta mal porfavor verifique su escritura");
 
                 }
-
-
-
-
-
             }
             else
             {
@@ -67,6 +76,11 @@ namespace inventor_manager
             }
            
 
+        }
+        private void BtnHome_Click(object sender, EventArgs e)
+        {
+            menu MainMenu = new menu();
+            MainMenu.Show();
         }
     }
 }
