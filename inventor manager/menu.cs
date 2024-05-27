@@ -36,7 +36,7 @@ namespace inventor_manager
 
         private void BtnSouldProduct_Click(object sender, EventArgs e)
         {
-            Products_sold products_Sold = new Products_sold();
+            Product_sale products_Sold = new Product_sale();
             products_Sold.Show();
             products_Sold.ReceivedImage = PictureImagePhoto.Image;
         }

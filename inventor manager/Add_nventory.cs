@@ -43,7 +43,7 @@ namespace inventor_manager
                     NewItemLstData.SubItems.Add(Convert.ToString(producto.Quantity));
                     NewItemLstData.SubItems.Add(producto.Mark);
 
-                    string product_for_txt = TxtAddName.Text + " " + producto.ToString() + " \n ";
+                    string product_for_txt = TxtAddName.Text + " " + producto.ToString();
                     try
                     {
                         // Escribe el contenido en el archivo especificado

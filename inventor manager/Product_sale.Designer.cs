@@ -1,6 +1,6 @@
 ﻿namespace inventor_manager
 {
-    partial class Products_sold
+    partial class Product_sale
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            BtnAccept = new Button();
+            BtnSeelct = new Button();
             ListViewDataProduct = new ListView();
             Name = new ColumnHeader();
             columnHeader1 = new ColumnHeader();
@@ -43,18 +43,19 @@
             TxtPrice = new TextBox();
             LblName = new Label();
             TxtAddName = new TextBox();
+            BtnReplace = new Button();
             ((System.ComponentModel.ISupportInitialize)PictureUser).BeginInit();
             SuspendLayout();
             // 
-            // BtnAccept
+            // BtnSeelct
             // 
-            BtnAccept.Location = new Point(881, 127);
-            BtnAccept.Name = "BtnAccept";
-            BtnAccept.Size = new Size(89, 33);
-            BtnAccept.TabIndex = 0;
-            BtnAccept.Text = "accept";
-            BtnAccept.UseVisualStyleBackColor = true;
-            BtnAccept.Click += BtnAccept_Click;
+            BtnSeelct.Location = new Point(924, 89);
+            BtnSeelct.Name = "BtnSeelct";
+            BtnSeelct.Size = new Size(89, 33);
+            BtnSeelct.TabIndex = 0;
+            BtnSeelct.Text = "Select";
+            BtnSeelct.UseVisualStyleBackColor = true;
+            BtnSeelct.Click += BtnSelect_Click;
             // 
             // ListViewDataProduct
             // 
@@ -162,11 +163,22 @@
             TxtAddName.Size = new Size(133, 23);
             TxtAddName.TabIndex = 11;
             // 
-            // Products_sold
+            // BtnReplace
+            // 
+            BtnReplace.Location = new Point(924, 135);
+            BtnReplace.Name = "BtnReplace";
+            BtnReplace.Size = new Size(89, 33);
+            BtnReplace.TabIndex = 19;
+            BtnReplace.Text = "Replace ";
+            BtnReplace.UseVisualStyleBackColor = true;
+            BtnReplace.Click += this.BtnReplace_Click;
+            // 
+            // Product_sale
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1123, 503);
+            Controls.Add(BtnReplace);
             Controls.Add(label3);
             Controls.Add(TxtMark);
             Controls.Add(label2);
@@ -177,7 +189,7 @@
             Controls.Add(TxtAddName);
             Controls.Add(PictureUser);
             Controls.Add(ListViewDataProduct);
-            Controls.Add(BtnAccept);
+            Controls.Add(BtnSeelct);
             Text = "Products_sold";
             ((System.ComponentModel.ISupportInitialize)PictureUser).EndInit();
             ResumeLayout(false);
@@ -186,7 +198,7 @@
 
         #endregion
 
-        private Button BtnAccept;
+        private Button BtnSeelct;
         private ListView ListViewDataProduct;
         private ColumnHeader Name;
         private ColumnHeader columnHeader1;
@@ -201,5 +213,6 @@
         private TextBox TxtPrice;
         private Label LblName;
         private TextBox TxtAddName;
+        private Button BtnReplace;
     }
 }
