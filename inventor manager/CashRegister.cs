@@ -7,18 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace inventor_manager
 {
-    public partial class Edit_Inventory : Form
+    public partial class CashRegister : Form
+        
     {
-        private string Url_txt_productos = "C:\\Users\\1gren\\Documents\\archivos_R\\datos.txt";
-        public Edit_Inventory()
+        int resultFinish = 0;
+        string Url_txt_productos = "C:\\Users\\1gren\\Documents\\archivos_R\\datos.txt";
+        public CashRegister()
         {
             InitializeComponent();
             Filllistview();
         }
+
         private Image receivedImage;
         public Image ReceivedImage
         {
@@ -51,7 +53,7 @@ namespace inventor_manager
                         }
 
                         // Agregar el item al ListView
-                        ListViewDataProduct.Items.Add(item);
+                        LstViewDataProductos.Items.Add(item);
                     }
                 }
                 else
@@ -64,53 +66,77 @@ namespace inventor_manager
                 MessageBox.Show("Error al leer el archivo: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void BtnSelect_Click(object sender, EventArgs e)
+
+
+
+        private void BtnSelection_Click(object sender, EventArgs e)
         {
-            if (ListViewDataProduct.SelectedItems.Count > 0)
+            if (LstViewDataProductos.SelectedItems.Count > 0)
             {
-                var selectedItem = ListViewDataProduct.SelectedItems[0];
-                TxtAddName.Text = selectedItem.Text;
-                TxtPrice.Text = selectedItem.SubItems[1].Text;
-                TxtQuanity.Text = selectedItem.SubItems[2].Text;
-                TxtMark.Text = selectedItem.SubItems[3].Text;
+                var selectedItem = LstViewDataProductos.SelectedItems[0];
+                LblSelection.Text = selectedItem.Text;
+
             }
             else
             {
                 MessageBox.Show("Seleccione un ítem para editar.");
             }
+
+            
         }
-        private void BtnReplace_Click(object sender, EventArgs e)
+        private void BtnAdd_Click(object sender, EventArgs e)
         {
-            if (ListViewDataProduct.SelectedItems.Count > 0)
+            if (LstViewDataProductos.SelectedItems.Count > 0)
             {
                 // Obtener el elemento seleccionado
-                var selectedItem = ListViewDataProduct.SelectedItems[0];
+                var selectedItem = LstViewDataProductos.SelectedItems[0];
 
-                // Actualizar los valores en los subitems del elemento seleccionado
-                selectedItem.Text = TxtAddName.Text;
-                selectedItem.SubItems[1].Text = TxtPrice.Text;
-                selectedItem.SubItems[2].Text = TxtQuanity.Text;
-                selectedItem.SubItems[3].Text = TxtMark.Text;
+
+
+                int Price = Convert.ToInt32(selectedItem.SubItems[1].Text);
+                int Quantity = Convert.ToInt32(selectedItem.SubItems[2].Text);
+
+                try
+                {
+                    int Shopp = Convert.ToInt32(TxtQuantity.Text);
+                    int ResutlTotal = Price * Shopp;
+                    resultFinish += ResutlTotal;
+
+
+                    int QuantitiyFinish = Quantity - Shopp;
+                    selectedItem.SubItems[2].Text = Convert.ToString(QuantitiyFinish);
+                    int Quantity_Shopp = Convert.ToInt32(TxtQuantity.Text);
+
+                    LblResult.Text = "$ " + Convert.ToString(resultFinish);
+                }
+                catch (FormatException)
+                {
+                    MessageBox.Show("El valor ingresado no es válido. Por favor, ingresa un número entero válido.", "Error de formato", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
 
                 using (StreamWriter writer = new StreamWriter(Url_txt_productos))
                 {
-                    // Recorre los elementos del ListView y escribe cada dato en una línea
-                    foreach (ListViewItem item in ListViewDataProduct.Items)
+                    foreach (ListViewItem item in LstViewDataProductos.Items)
                     {
                         // Construir una cadena con todos los datos del elemento separados por espacios
                         string line = $"{item.Text} {item.SubItems[1].Text} {item.SubItems[2].Text} {item.SubItems[3].Text}";
                         writer.WriteLine(line); // Escribir la línea en el archivo
                     }
                 }
-
-                // Opcionalmente, puedes mostrar un mensaje de confirmación
-                MessageBox.Show("El producto ha sido actualizado correctamente.");
             }
             else
             {
                 MessageBox.Show("Seleccione un ítem para editar");
             }
+
+            
+
+
         }
 
     }
+
+    
+
 }

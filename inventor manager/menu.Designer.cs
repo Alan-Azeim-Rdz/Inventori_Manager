@@ -72,6 +72,7 @@
             BtnCashRegister.TabIndex = 3;
             BtnCashRegister.Text = "cash register";
             BtnCashRegister.UseVisualStyleBackColor = true;
+            BtnCashRegister.Click += BtnCashRegister_Click;
             // 
             // menu
             // 

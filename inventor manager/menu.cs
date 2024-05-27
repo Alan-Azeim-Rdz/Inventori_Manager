@@ -40,5 +40,12 @@ namespace inventor_manager
             products_Sold.Show();
             products_Sold.ReceivedImage = PictureImagePhoto.Image;
         }
+
+        private void BtnCashRegister_Click(object sender, EventArgs e)
+        {
+            CashRegister cash = new CashRegister();
+            cash.Show();
+            cash.ReceivedImage = PictureImagePhoto.Image;
+        }
     }
 }
