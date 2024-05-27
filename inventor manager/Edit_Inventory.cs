@@ -11,10 +11,10 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace inventor_manager
 {
-    public partial class Product_sale : Form
+    public partial class Edit_Inventory : Form
     {
         private string Url_txt_productos = "C:\\Users\\1gren\\Documents\\archivos_R\\datos.txt";
-        public Product_sale()
+        public Edit_Inventory()
         {
             InitializeComponent();
             Filllistview();

@@ -1,6 +1,6 @@
 ﻿namespace inventor_manager
 {
-    partial class Product_sale
+    partial class Edit_Inventory
     {
         /// <summary>
         /// Required designer variable.
