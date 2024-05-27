@@ -39,7 +39,7 @@
             TxtQuantity = new TextBox();
             LblTotal = new Label();
             LblResult = new Label();
-            listView1 = new ListView();
+            ListVTicket = new ListView();
             columnHeader4 = new ColumnHeader();
             columnHeader5 = new ColumnHeader();
             columnHeader6 = new ColumnHeader();
@@ -137,15 +137,15 @@
             LblResult.Size = new Size(0, 28);
             LblResult.TabIndex = 9;
             // 
-            // listView1
+            // ListVTicket
             // 
-            listView1.Columns.AddRange(new ColumnHeader[] { columnHeader4, columnHeader5, columnHeader6, columnHeader7 });
-            listView1.Location = new Point(29, 269);
-            listView1.Name = "listView1";
-            listView1.Size = new Size(505, 229);
-            listView1.TabIndex = 10;
-            listView1.UseCompatibleStateImageBehavior = false;
-            listView1.View = View.Details;
+            ListVTicket.Columns.AddRange(new ColumnHeader[] { columnHeader4, columnHeader5, columnHeader6, columnHeader7 });
+            ListVTicket.Location = new Point(29, 269);
+            ListVTicket.Name = "ListVTicket";
+            ListVTicket.Size = new Size(505, 229);
+            ListVTicket.TabIndex = 10;
+            ListVTicket.UseCompatibleStateImageBehavior = false;
+            ListVTicket.View = View.Details;
             // 
             // columnHeader4
             // 
@@ -188,7 +188,7 @@
             BtnAdd.TabIndex = 12;
             BtnAdd.Text = "Add";
             BtnAdd.UseVisualStyleBackColor = true;
-            BtnAdd.Click += this.BtnAdd_Click;
+            BtnAdd.Click += BtnAdd_Click;
             // 
             // CashRegister
             // 
@@ -197,7 +197,7 @@
             ClientSize = new Size(1112, 577);
             Controls.Add(BtnAdd);
             Controls.Add(LblTiket);
-            Controls.Add(listView1);
+            Controls.Add(ListVTicket);
             Controls.Add(LblResult);
             Controls.Add(LblTotal);
             Controls.Add(TxtQuantity);
@@ -225,7 +225,7 @@
         private TextBox TxtQuantity;
         private Label LblTotal;
         private Label LblResult;
-        private ListView listView1;
+        private ListView ListVTicket;
         private ColumnHeader columnHeader4;
         private ColumnHeader columnHeader5;
         private ColumnHeader columnHeader6;
