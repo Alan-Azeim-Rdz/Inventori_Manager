@@ -8,7 +8,7 @@ namespace inventor_manager
 {
     internal class Producto_Sale
     {
-        public string Name { get; private set; }
+        public string Name { get; }
 
         public int Stock
         {
