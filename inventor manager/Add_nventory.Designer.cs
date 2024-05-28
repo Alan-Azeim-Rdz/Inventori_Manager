@@ -44,6 +44,7 @@
             TxtMark = new TextBox();
             PicturUser = new PictureBox();
             BtnHome = new Button();
+            BtnQuantityProductTotal = new Button();
             ((System.ComponentModel.ISupportInitialize)PicturUser).BeginInit();
             SuspendLayout();
             // 
@@ -172,13 +173,24 @@
             BtnHome.TabIndex = 11;
             BtnHome.Text = "Home";
             BtnHome.UseVisualStyleBackColor = true;
-            BtnHome.Click += this.BtnHome_Click;
+            BtnHome.Click += BtnHome_Click;
+            // 
+            // BtnQuantityProductTotal
+            // 
+            BtnQuantityProductTotal.Location = new Point(439, 465);
+            BtnQuantityProductTotal.Name = "BtnQuantityProductTotal";
+            BtnQuantityProductTotal.Size = new Size(195, 33);
+            BtnQuantityProductTotal.TabIndex = 12;
+            BtnQuantityProductTotal.Text = "Quantity of te products total";
+            BtnQuantityProductTotal.UseVisualStyleBackColor = true;
+            BtnQuantityProductTotal.Click += BtnQuantityProductTotal_Click;
             // 
             // Add_nventory
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1157, 545);
+            Controls.Add(BtnQuantityProductTotal);
             Controls.Add(BtnHome);
             Controls.Add(PicturUser);
             Controls.Add(label3);
@@ -216,5 +228,6 @@
         private TextBox TxtMark;
         private PictureBox PicturUser;
         private Button BtnHome;
+        private Button BtnQuantityProductTotal;
     }
 }

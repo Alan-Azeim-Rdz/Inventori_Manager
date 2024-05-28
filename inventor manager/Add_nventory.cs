@@ -5,7 +5,7 @@ using System.Xml;
 
 namespace inventor_manager
 {
-    
+
     public partial class Add_nventory : Form
     {
         string Url_exel_productos = "C:\\Users\\1gren\\Documents\\prductos.xlsx";
@@ -22,7 +22,7 @@ namespace inventor_manager
             set
             {
                 receivedImage = value;
-               PicturUser.Image = receivedImage;
+                PicturUser.Image = receivedImage;
             }
         }
 
@@ -30,7 +30,7 @@ namespace inventor_manager
 
         private void BtnSearch_Click(object sender, EventArgs e)
         {
-            if(!(TxtAddName.Text == "")&&!(TxtPrice.Text == "") && !(TxtQuanity.Text == "") && !(TxtMark.Text == ""))
+            if (!(TxtAddName.Text == "") && !(TxtPrice.Text == "") && !(TxtQuanity.Text == "") && !(TxtMark.Text == ""))
             {
                 ListViewItem NewItemLstData = new ListViewItem(TxtAddName.Text);
                 try
@@ -57,7 +57,7 @@ namespace inventor_manager
                     }
 
                 }
-                catch (System.InvalidCastException) 
+                catch (System.InvalidCastException)
                 {
                     LstViewDataProductos.Items.Remove(NewItemLstData);
                     MessageBox.Show("alguno de los datos enviados esta mal porfavor verifique su escritura");
@@ -74,7 +74,7 @@ namespace inventor_manager
             {
                 MessageBox.Show("Todos los campos deven estar llenos para poder ingresar");
             }
-           
+
 
         }
         private void BtnHome_Click(object sender, EventArgs e)
@@ -82,5 +82,40 @@ namespace inventor_manager
             menu MainMenu = new menu();
             MainMenu.Show();
         }
+
+        
+
+        private void BtnQuantityProductTotal_Click(object sender, EventArgs e)
+        {
+            ObtenerCantidadProductosTotales();
+        }
+
+        public DialogResult ObtenerCantidadProductosTotales()
+        {
+            int totalProductos = 0;
+
+            try
+            {
+                if (File.Exists(Url_txt_productos))
+                {
+                    // Leer todas las líneas del archivo
+                    string[] lineas = File.ReadAllLines(Url_txt_productos);
+
+                    // Contar el número de líneas (cada línea representa un producto)
+                    totalProductos = lineas.Length;
+                }
+                else
+                {
+                    MessageBox.Show("El archivo no existe en la ruta especificada.", "Archivo no encontrado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al leer el archivo: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return MessageBox.Show("los productos que se encuentran registrados en el almacen ahora son " +(Convert.ToString(totalProductos.ToString())));
+        }
+
     }
 }

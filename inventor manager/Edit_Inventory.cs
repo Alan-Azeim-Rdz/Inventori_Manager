@@ -112,5 +112,58 @@ namespace inventor_manager
             }
         }
 
+
+
+
+
+       
+
+        private void BtnDelete_Click(object sender, EventArgs e)
+        {
+            DeleteSelect(ListViewDataProduct, Url_txt_productos);
+        }
+
+        public void DeleteSelect(System.Windows.Forms.ListView listView,string Url)
+        {
+            if (listView.SelectedItems.Count > 0)
+            {
+                foreach (ListViewItem item in listView.SelectedItems)
+                {
+                    listView.Items.Remove(item);
+                }
+                ActualizarTxt(listView, Url);
+            }
+            else
+            {
+                MessageBox.Show("No hay elementos seleccionados para eliminar.", "Elemento no seleccionado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+        private void ActualizarTxt(System.Windows.Forms.ListView listView, string filePath)
+        {
+            using (StreamWriter writer = new StreamWriter(filePath, false))
+            {
+                // Write the header row if it exists
+                if (listView.Columns.Count > 0)
+                {
+                    string headerRow = "";
+                    foreach (ColumnHeader column in listView.Columns)
+                    {
+                        headerRow += column.Text + " ";
+                    }
+                    writer.WriteLine(headerRow.Trim());
+                }
+
+                // Write each remaining item's data
+                foreach (ListViewItem item in listView.Items)
+                {
+                    string dataRow = "";
+                    for (int i = 0; i < item.SubItems.Count; i++)
+                    {
+                        dataRow += item.SubItems[i].Text + " ";
+                    }
+                    writer.WriteLine(dataRow.Trim());
+                }
+            }
+        }
     }
 }

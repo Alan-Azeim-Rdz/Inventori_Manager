@@ -44,6 +44,7 @@
             LblName = new Label();
             TxtAddName = new TextBox();
             BtnReplace = new Button();
+            BtnDelete = new Button();
             ((System.ComponentModel.ISupportInitialize)PictureUser).BeginInit();
             SuspendLayout();
             // 
@@ -171,13 +172,24 @@
             BtnReplace.TabIndex = 19;
             BtnReplace.Text = "Replace ";
             BtnReplace.UseVisualStyleBackColor = true;
-            BtnReplace.Click += this.BtnReplace_Click;
+            BtnReplace.Click += BtnReplace_Click;
             // 
-            // Product_sale
+            // BtnDelete
+            // 
+            BtnDelete.Location = new Point(924, 186);
+            BtnDelete.Name = "BtnDelete";
+            BtnDelete.Size = new Size(89, 33);
+            BtnDelete.TabIndex = 20;
+            BtnDelete.Text = "Delete";
+            BtnDelete.UseVisualStyleBackColor = true;
+            BtnDelete.Click += BtnDelete_Click;
+            // 
+            // Edit_Inventory
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1123, 503);
+            Controls.Add(BtnDelete);
             Controls.Add(BtnReplace);
             Controls.Add(label3);
             Controls.Add(TxtMark);
@@ -214,5 +226,6 @@
         private Label LblName;
         private TextBox TxtAddName;
         private Button BtnReplace;
+        private Button BtnDelete;
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,12 +8,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ClosedXML;
+using ClosedXML.Excel;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+
+
+
 
 namespace inventor_manager
 {
     public partial class CashRegister : Form
-        
+
     {
+        Producto_Sale selectedProduct;
+        int selectedProductStock;
         int resultFinish = 0;
         string Url_txt_productos = "C:\\Users\\1gren\\Documents\\archivos_R\\datos.txt";
         public CashRegister()
@@ -76,16 +85,24 @@ namespace inventor_manager
                 var selectedItem = LstViewDataProductos.SelectedItems[0];
                 LblSelection.Text = selectedItem.Text;
 
+                string productName = selectedItem.Text;
+                double productPrice = Convert.ToDouble(selectedItem.SubItems[1].Text);
+                int productStock = Convert.ToInt32(selectedItem.SubItems[2].Text);
+
+                selectedProduct = new Producto_Sale(productName, productPrice, productStock);
+                selectedProductStock = productStock;
+
             }
             else
             {
                 MessageBox.Show("Seleccione un ítem para editar.");
             }
 
-            
+
         }
         private void BtnAdd_Click(object sender, EventArgs e)
         {
+
             if (LstViewDataProductos.SelectedItems.Count > 0)
             {
                 // Obtener el elemento seleccionado
@@ -98,16 +115,37 @@ namespace inventor_manager
 
                 try
                 {
-                    int Shopp = Convert.ToInt32(TxtQuantity.Text);
-                    int ResutlTotal = Price * Shopp;
-                    resultFinish += ResutlTotal;
+                    int quantityToSell = Convert.ToInt32(TxtQuantity.Text);
 
+                    // Validate quantity to sell against available stock
+                    if (quantityToSell <= selectedProductStock)
+                    {
+                        // Update total result
+                        resultFinish += (int)(selectedProduct.Price * quantityToSell);
+                        LblResult.Text = "$ " + resultFinish;
 
-                    int QuantitiyFinish = Quantity - Shopp;
-                    selectedItem.SubItems[2].Text = Convert.ToString(QuantitiyFinish);
-                    int Quantity_Shopp = Convert.ToInt32(TxtQuantity.Text);
+                        // Update ListView ticket
+                        ListViewItem itemTicket = new ListViewItem(selectedProduct.Name);
+                        ListVTicket.Items.Add(itemTicket);
+                        itemTicket.SubItems.Add(selectedProduct.Price.ToString());
+                        itemTicket.SubItems.Add(quantityToSell.ToString());
+                        itemTicket.SubItems.Add(selectedProduct.Price.ToString()); // Assuming discount is 0
 
-                    LblResult.Text = "$ " + Convert.ToString(resultFinish);
+                        // Update product stock
+                        selectedProduct.ReduceStock((quantityToSell));
+                        selectedProductStock -= quantityToSell;
+
+                        // Update ListView product stock
+                        LstViewDataProductos.SelectedItems[0].SubItems[2].Text = selectedProductStock.ToString();
+
+                        // Update product file
+                        UpdateProductFile();
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("La cantidad seleccionada excede la cantidad disponible.");
+                    }
                 }
                 catch (FormatException)
                 {
@@ -130,13 +168,61 @@ namespace inventor_manager
                 MessageBox.Show("Seleccione un ítem para editar");
             }
 
-            
+
 
 
         }
+        private void UpdateProductFile()
+        {
+            try
+            {
+                if (File.Exists(Url_txt_productos))
+                {
+                    // Leer todas las líneas del archivo
+                    string[] lines = File.ReadAllLines(Url_txt_productos);
+
+                    // Crear una lista para almacenar los datos actualizados del producto
+                    List<string> updatedLines = new List<string>();
+
+                    // Procesar cada línea
+                    foreach (string line in lines)
+                    {
+                        string[] parts = line.Split(' ');
+                        string nombreProducto = parts[0];
+
+                        // Actualizar stock para el producto seleccionado
+                        if (nombreProducto == selectedProduct.Name)
+                        {
+                            parts[2] = selectedProductStock.ToString(); // Actualizar valor de stock
+                        }
+
+                        // Construir la línea actualizada
+                        string updatedLine = string.Join(" ", parts);
+                        updatedLines.Add(updatedLine);
+                    }
+
+                    // Escribir los datos actualizados en el archivo
+                    File.WriteAllLines(Url_txt_productos, updatedLines);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al actualizar el archivo de productos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void BtnTicketJason_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnTicketExcel_Click(object sender, EventArgs e)
+        {
+
+            
+        }
+
+
 
     }
-
-    
-
 }

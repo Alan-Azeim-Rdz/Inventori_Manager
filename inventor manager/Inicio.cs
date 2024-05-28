@@ -21,6 +21,8 @@ namespace inventor_manager
         public Inicio()
         {
             InitializeComponent();
+            Inicio.ShowWelcomeMessage();
+            dateandtime();
 
         }
 
@@ -127,6 +129,14 @@ namespace inventor_manager
            
 
 
+        }
+        public static void ShowWelcomeMessage()
+        {
+            MessageBox.Show("¡Bienvenido al administrador de inventario!", "Bienvenido", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        private void dateandtime()
+        {
+            MessageBox.Show("La fecha y hora actual es: " + DateTime.Now.ToString(), "Fecha y Hora", MessageBoxButtons.OK, MessageBoxIcon.None);
         }
     }
 }

@@ -46,6 +46,8 @@
             columnHeader7 = new ColumnHeader();
             LblTiket = new Label();
             BtnAdd = new Button();
+            BtnTicketJason = new Button();
+            BtnTicketExcel = new Button();
             ((System.ComponentModel.ISupportInitialize)PictureUser).BeginInit();
             SuspendLayout();
             // 
@@ -190,11 +192,33 @@
             BtnAdd.UseVisualStyleBackColor = true;
             BtnAdd.Click += BtnAdd_Click;
             // 
+            // BtnTicketJason
+            // 
+            BtnTicketJason.Location = new Point(636, 519);
+            BtnTicketJason.Name = "BtnTicketJason";
+            BtnTicketJason.Size = new Size(103, 47);
+            BtnTicketJason.TabIndex = 13;
+            BtnTicketJason.Text = "Print Ticket";
+            BtnTicketJason.UseVisualStyleBackColor = true;
+            BtnTicketJason.Click += BtnTicketJason_Click;
+            // 
+            // BtnTicketExcel
+            // 
+            BtnTicketExcel.Location = new Point(756, 519);
+            BtnTicketExcel.Name = "BtnTicketExcel";
+            BtnTicketExcel.Size = new Size(116, 47);
+            BtnTicketExcel.TabIndex = 14;
+            BtnTicketExcel.Text = "Print Ticket (excel)";
+            BtnTicketExcel.UseVisualStyleBackColor = true;
+            BtnTicketExcel.Click += BtnTicketExcel_Click;
+            // 
             // CashRegister
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1112, 577);
+            Controls.Add(BtnTicketExcel);
+            Controls.Add(BtnTicketJason);
             Controls.Add(BtnAdd);
             Controls.Add(LblTiket);
             Controls.Add(ListVTicket);
@@ -232,5 +256,7 @@
         private ColumnHeader columnHeader7;
         private Label LblTiket;
         private Button BtnAdd;
+        private Button BtnTicketJason;
+        private Button BtnTicketExcel;
     }
 }
