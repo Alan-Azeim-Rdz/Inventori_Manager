@@ -10,7 +10,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ClosedXML;
 using ClosedXML.Excel;
+using DocumentFormat.OpenXml.Spreadsheet;
+using OfficeOpenXml;
+using DocumentFormat.OpenXml;
+using DocumentFormat.OpenXml.Packaging;
+using Newtonsoft.Json;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using OfficeOpenXml.Style.XmlAccess;
 
 
 
@@ -23,6 +29,7 @@ namespace inventor_manager
         Producto_Sale selectedProduct;
         int selectedProductStock;
         int resultFinish = 0;
+
         string Url_txt_productos = "C:\\Users\\1gren\\Documents\\archivos_R\\datos.txt";
         public CashRegister()
         {
@@ -213,13 +220,105 @@ namespace inventor_manager
 
         private void BtnTicketJason_Click(object sender, EventArgs e)
         {
+            if (LstViewDataProductos.Items.Count == 0)
+            {
+                MessageBox.Show("No hay elementos en la lista para convertir a JSON.", "Lista vacía", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            try
+            {
+                // Create a List to hold product data in a JSON-friendly format
+                List<Dictionary<string, object>> productList = new List<Dictionary<string, object>>();
+
+                // Extract and format product data from ListView items
+                foreach (ListViewItem item in LstViewDataProductos.Items)
+                {
+                    Dictionary<string, object> productData = new Dictionary<string, object>();
+                    productData.Add("Nombre", item.Text);
+                    productData.Add("Precio", item.SubItems[1].Text);
+                    productData.Add("Stock", item.SubItems[2].Text);
+
+                    productList.Add(productData);
+                }
+
+
+                string jsonString = JsonConvert.SerializeObject(productList, Formatting.Indented);
+
+                // Save the JSON string to a file
+                string filePath = Path.Combine(Path.GetDirectoryName(Url_txt_productos), "ticket.json");
+                File.WriteAllText(filePath, jsonString);
+
+                MessageBox.Show("Ticket generado exitosamente en formato JSON: " + filePath, "Listo!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al generar el ticket JSON: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
 
         }
 
         private void BtnTicketExcel_Click(object sender, EventArgs e)
         {
+            int itemCount = ListVTicket.Items.Count;
+            string url_excel = "C:\\Users\\1gren\\Documents\\archivos_R\\Ticket.xlsx";
+            string[,] data = new string[itemCount, 4];
 
-            
+
+            for (int i = 0; i < itemCount; i++)
+            {
+                // Obtener los datos de cada elemento del ListView
+                string dataItem1 = ListVTicket.Items[i].SubItems[0].Text; 
+                string dataItem2 = ListVTicket.Items[i].SubItems[1].Text; 
+                string dataItem3 = ListVTicket.Items[i].SubItems[2].Text;
+                string dataItem4 = ListVTicket.Items[i].SubItems[3].Text;
+
+                data[i, 0] = dataItem1;
+                data[i, 1] = dataItem2;
+                data[i, 2] = dataItem3;
+                data[i, 3] = dataItem4;
+            }
+            using (SpreadsheetDocument spreadsheetDocument = SpreadsheetDocument.Create(url_excel, SpreadsheetDocumentType.Workbook))
+            {
+                // Agregar una hoja de cálculo al documento
+                WorkbookPart workbookPart = spreadsheetDocument.AddWorkbookPart();
+                workbookPart.Workbook = new Workbook();
+
+                WorksheetPart worksheetPart = workbookPart.AddNewPart<WorksheetPart>();
+                worksheetPart.Worksheet = new Worksheet(new SheetData());
+
+                Sheets sheets = spreadsheetDocument.WorkbookPart.Workbook.AppendChild(new Sheets());
+                Sheet sheet = new Sheet() { Id = spreadsheetDocument.WorkbookPart.GetIdOfPart(worksheetPart), SheetId = 1, Name = "Sheet1" };
+                sheets.Append(sheet);
+
+                SheetData sheetData = worksheetPart.Worksheet.GetFirstChild<SheetData>();
+
+                // Escribir datos en la hoja de cálculo
+                for (int i = 0; i < data.GetLength(0); i++)
+                {
+                    Row row = new Row();
+                    for (int j = 0; j < data.GetLength(1); j++)
+                    {
+                        Cell cell = new Cell(new CellValue(data[i, j]));
+                        row.Append(cell);
+                    }
+                    sheetData.Append(row);
+                }
+                // Agregar texto adicional al final del archivo
+                Row additionalRow = new Row();
+                Cell additionalCell = new Cell(new CellValue(LblResult.Text));
+                additionalRow.Append(additionalCell);
+                sheetData.Append(additionalRow);
+
+            }
+
+            MessageBox.Show("Datos guardados en Excel correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+
+
+
+
         }
 
 
