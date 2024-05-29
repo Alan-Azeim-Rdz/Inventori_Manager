@@ -15,12 +15,16 @@ namespace inventor_manager
         int selectedProductStock;
         int resultFinish = 0;
 
+
+
         string Url_txt_productos = "C:\\Users\\1gren\\Documents\\archivos_R\\datos.txt";
         public CashRegister()
         {
             InitializeComponent();
             Filllistview();
         }
+
+
 
         private System.Drawing.Image receivedImage;
         public System.Drawing.Image ReceivedImage
@@ -32,6 +36,10 @@ namespace inventor_manager
                 PictureUser.Image = receivedImage;
             }
         }
+
+
+
+
 
         private void Filllistview()
         {
@@ -75,13 +83,13 @@ namespace inventor_manager
             if (LstViewDataProductos.SelectedItems.Count > 0)
             {
                 var selectedItem = LstViewDataProductos.SelectedItems[0];
-                LblSelection.Text = selectedItem.Text;
 
                 string productName = selectedItem.Text;
                 double productPrice = Convert.ToDouble(selectedItem.SubItems[1].Text);
                 int productStock = Convert.ToInt32(selectedItem.SubItems[2].Text);
 
                 selectedProduct = new Producto_Sale(productName, productPrice, productStock);
+                LblSelection.Text = selectedProduct.ToString();
                 selectedProductStock = productStock;
 
             }
@@ -92,6 +100,12 @@ namespace inventor_manager
 
 
         }
+
+
+
+
+
+
         private void BtnAdd_Click(object sender, EventArgs e)
         {
 
@@ -164,6 +178,10 @@ namespace inventor_manager
 
 
         }
+
+
+
+
         private void UpdateProductFile()
         {
             try
@@ -202,6 +220,9 @@ namespace inventor_manager
                 MessageBox.Show("Error al actualizar el archivo de productos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+
+
 
         private void BtnTicketJason_Click(object sender, EventArgs e)
         {
@@ -250,9 +271,6 @@ namespace inventor_manager
 
 
 
-
-
-
         private void BtnTicketExcel_Click(object sender, EventArgs e)
         {
             string url_excel = "C:\\Users\\1gren\\Documents\\archivos_R\\Ticket.xlsx";
@@ -280,6 +298,8 @@ namespace inventor_manager
             }
 
         }
+
+
 
         private void CreateExcelFile(string filePath, string[,] data)
         {

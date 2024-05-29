@@ -58,5 +58,10 @@ namespace inventor_manager
                 throw new ArgumentOutOfRangeException("Sold quantity cannot exceed available stock.");
             }
         }
+
+        public override string ToString() 
+        {
+            return "el producto " + Name + " tiene a la venta " + quantity + " artuculos disponibles " + "y el precio de cada uno es "+ Price;
+        }
     }
 }

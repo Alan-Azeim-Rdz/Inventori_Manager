@@ -81,35 +81,45 @@ namespace inventor_manager
         }
         private void BtnReplace_Click(object sender, EventArgs e)
         {
-            if (ListViewDataProduct.SelectedItems.Count > 0)
+            if (!(TxtAddName.Text == "") && !(TxtPrice.Text == "") && !(TxtQuanity.Text == "") && !(TxtMark.Text == ""))
             {
-                // Obtener el elemento seleccionado
-                var selectedItem = ListViewDataProduct.SelectedItems[0];
-
-                // Actualizar los valores en los subitems del elemento seleccionado
-                selectedItem.Text = TxtAddName.Text;
-                selectedItem.SubItems[1].Text = TxtPrice.Text;
-                selectedItem.SubItems[2].Text = TxtQuanity.Text;
-                selectedItem.SubItems[3].Text = TxtMark.Text;
-
-                using (StreamWriter writer = new StreamWriter(Url_txt_productos))
+                if (ListViewDataProduct.SelectedItems.Count > 0)
                 {
-                    // Recorre los elementos del ListView y escribe cada dato en una línea
-                    foreach (ListViewItem item in ListViewDataProduct.Items)
-                    {
-                        // Construir una cadena con todos los datos del elemento separados por espacios
-                        string line = $"{item.Text} {item.SubItems[1].Text} {item.SubItems[2].Text} {item.SubItems[3].Text}";
-                        writer.WriteLine(line); // Escribir la línea en el archivo
-                    }
-                }
+                    // Obtener el elemento seleccionado
+                    string Name_without_spaces = TxtAddName.Text.Replace(" ", "-");
+                    string Mark_without_spaces = TxtMark.Text.Replace(" ", "-");
+                    var selectedItem = ListViewDataProduct.SelectedItems[0];
 
-                // Opcionalmente, puedes mostrar un mensaje de confirmación
-                MessageBox.Show("El producto ha sido actualizado correctamente.");
+                    // Actualizar los valores en los subitems del elemento seleccionado
+                    selectedItem.Text = Name_without_spaces;
+                    selectedItem.SubItems[1].Text = TxtPrice.Text;
+                    selectedItem.SubItems[2].Text = TxtQuanity.Text;
+                    selectedItem.SubItems[3].Text = Mark_without_spaces;
+
+                    using (StreamWriter writer = new StreamWriter(Url_txt_productos))
+                    {
+                        // Recorre los elementos del ListView y escribe cada dato en una línea
+                        foreach (ListViewItem item in ListViewDataProduct.Items)
+                        {
+                            // Construir una cadena con todos los datos del elemento separados por espacios
+                            string line = $"{item.Text} {item.SubItems[1].Text} {item.SubItems[2].Text} {item.SubItems[3].Text}";
+                            writer.WriteLine(line); // Escribir la línea en el archivo
+                        }
+                    }
+
+                    // Opcionalmente, puedes mostrar un mensaje de confirmación
+                    MessageBox.Show("El producto ha sido actualizado correctamente.");
+                }
+                else
+                {
+                    MessageBox.Show("Seleccione un ítem para editar");
+                }
             }
             else
             {
-                MessageBox.Show("Seleccione un ítem para editar");
+                MessageBox.Show("Todos los campos deven estar llenos para poder ingresar");
             }
+           
         }
 
 

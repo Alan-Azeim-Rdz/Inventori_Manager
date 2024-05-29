@@ -32,18 +32,21 @@ namespace inventor_manager
         {
             if (!(TxtAddName.Text == "") && !(TxtPrice.Text == "") && !(TxtQuanity.Text == "") && !(TxtMark.Text == ""))
             {
-                ListViewItem NewItemLstData = new ListViewItem(TxtAddName.Text);
+                string Name_without_spaces = TxtAddName.Text.Replace(" ","-"); 
+                string Mark_without_spaces = TxtMark.Text.Replace(" ", "-");
+                ListViewItem NewItemLstData = new ListViewItem(Name_without_spaces);
                 try
                 {
                     LstViewDataProductos.Items.Add(NewItemLstData);
+
                     Product producto = new Product(Convert.ToInt32(TxtPrice.Text), Convert.ToInt32(TxtQuanity.Text), TxtMark.Text);
 
 
                     NewItemLstData.SubItems.Add(Convert.ToString(producto.Price));
                     NewItemLstData.SubItems.Add(Convert.ToString(producto.Quantity));
-                    NewItemLstData.SubItems.Add(producto.Mark);
+                    NewItemLstData.SubItems.Add(Mark_without_spaces);
 
-                    string product_for_txt = TxtAddName.Text + " " + producto.ToString();
+                    string product_for_txt = Name_without_spaces + " " + producto.ToString();
                     try
                     {
                         // Escribe el contenido en el archivo especificado
