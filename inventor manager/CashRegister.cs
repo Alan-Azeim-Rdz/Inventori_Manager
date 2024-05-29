@@ -115,9 +115,6 @@ namespace inventor_manager
             {
                 // Obtener el elemento seleccionado
                 var selectedItem = LstViewDataProductos.SelectedItems[0];
-
-
-
                 int Price = Convert.ToInt32(selectedItem.SubItems[1].Text);
                 int Quantity = Convert.ToInt32(selectedItem.SubItems[2].Text);
 

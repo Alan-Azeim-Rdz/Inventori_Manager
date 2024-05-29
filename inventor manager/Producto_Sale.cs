@@ -15,14 +15,7 @@ namespace inventor_manager
         {
             set
             {
-                if (value >= 0)
-                {
-                    quantity = value;
-                }
-                else
-                {
-                    throw new ArgumentOutOfRangeException("Ya no hay mas productos en el inventario");
-                }
+                quantity = value;
             }
         }
 
