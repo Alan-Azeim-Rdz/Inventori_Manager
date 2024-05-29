@@ -45,7 +45,8 @@ namespace inventor_manager
                         string[] partes = linea.Split(' ');
 
                         ListViewItem item = new ListViewItem(partes[0]);
-                        for (int i = 1; i < partes.Length; i++)
+                        for (int i = 1; i < partes.Length
+                            ; i++)
                         {
                             item.SubItems.Add(partes[i]);
                         }
@@ -148,20 +149,21 @@ namespace inventor_manager
                 MessageBox.Show("No hay elementos seleccionados para eliminar.", "Elemento no seleccionado", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
+
         private void ActualizarTxt(System.Windows.Forms.ListView listView, string filePath)
         {
             using (StreamWriter writer = new StreamWriter(filePath, false))
             {
-                // Write the header row if it exists
-                if (listView.Columns.Count > 0)
-                {
-                    string headerRow = "";
-                    foreach (ColumnHeader column in listView.Columns)
-                    {
-                        headerRow += column.Text + " ";
-                    }
-                    writer.WriteLine(headerRow.Trim());
-                }
+                //// Write the header row if it exists
+                //if (listView.Columns.Count > 0)
+                //{
+                //    string headerRow = "";
+                //    foreach (ColumnHeader column in listView.Columns)
+                //    {
+                //        headerRow += column.Text + " ";
+                //    }
+                //    writer.WriteLine(headerRow.Trim());
+                //}
 
                 // Write each remaining item's data
                 foreach (ListViewItem item in listView.Items)

@@ -50,9 +50,10 @@
             // 
             // BtnSeelct
             // 
-            BtnSeelct.Location = new Point(924, 89);
+            BtnSeelct.Location = new Point(1056, 119);
+            BtnSeelct.Margin = new Padding(3, 4, 3, 4);
             BtnSeelct.Name = "BtnSeelct";
-            BtnSeelct.Size = new Size(89, 33);
+            BtnSeelct.Size = new Size(102, 44);
             BtnSeelct.TabIndex = 0;
             BtnSeelct.Text = "Select";
             BtnSeelct.UseVisualStyleBackColor = true;
@@ -61,9 +62,10 @@
             // ListViewDataProduct
             // 
             ListViewDataProduct.Columns.AddRange(new ColumnHeader[] { Name, columnHeader1, columnHeader2, columnHeader3 });
-            ListViewDataProduct.Location = new Point(12, 12);
+            ListViewDataProduct.Location = new Point(14, 16);
+            ListViewDataProduct.Margin = new Padding(3, 4, 3, 4);
             ListViewDataProduct.Name = "ListViewDataProduct";
-            ListViewDataProduct.Size = new Size(485, 462);
+            ListViewDataProduct.Size = new Size(554, 615);
             ListViewDataProduct.TabIndex = 1;
             ListViewDataProduct.UseCompatibleStateImageBehavior = false;
             ListViewDataProduct.View = View.Details;
@@ -75,6 +77,7 @@
             // 
             // columnHeader1
             // 
+            columnHeader1.Tag = "";
             columnHeader1.Text = "Price";
             columnHeader1.TextAlign = HorizontalAlignment.Center;
             columnHeader1.Width = 120;
@@ -93,9 +96,10 @@
             // 
             // PictureUser
             // 
-            PictureUser.Location = new Point(1056, 12);
+            PictureUser.Location = new Point(1207, 16);
+            PictureUser.Margin = new Padding(3, 4, 3, 4);
             PictureUser.Name = "PictureUser";
-            PictureUser.Size = new Size(55, 49);
+            PictureUser.Size = new Size(63, 65);
             PictureUser.SizeMode = PictureBoxSizeMode.StretchImage;
             PictureUser.TabIndex = 2;
             PictureUser.TabStop = false;
@@ -103,72 +107,77 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(549, 145);
+            label3.Location = new Point(627, 193);
             label3.Name = "label3";
-            label3.Size = new Size(34, 15);
+            label3.Size = new Size(42, 20);
             label3.TabIndex = 18;
             label3.Text = "Mark";
             // 
             // TxtMark
             // 
-            TxtMark.Location = new Point(691, 145);
+            TxtMark.Location = new Point(790, 193);
+            TxtMark.Margin = new Padding(3, 4, 3, 4);
             TxtMark.Name = "TxtMark";
-            TxtMark.Size = new Size(133, 23);
+            TxtMark.Size = new Size(151, 27);
             TxtMark.TabIndex = 17;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(549, 107);
+            label2.Location = new Point(627, 143);
             label2.Name = "label2";
-            label2.Size = new Size(53, 15);
+            label2.Size = new Size(65, 20);
             label2.TabIndex = 16;
             label2.Text = "Quantity";
             // 
             // TxtQuanity
             // 
-            TxtQuanity.Location = new Point(691, 107);
+            TxtQuanity.Location = new Point(790, 143);
+            TxtQuanity.Margin = new Padding(3, 4, 3, 4);
             TxtQuanity.Name = "TxtQuanity";
-            TxtQuanity.Size = new Size(133, 23);
+            TxtQuanity.Size = new Size(151, 27);
             TxtQuanity.TabIndex = 15;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(549, 73);
+            label1.Location = new Point(627, 97);
             label1.Name = "label1";
-            label1.Size = new Size(119, 15);
+            label1.Size = new Size(149, 20);
             label1.TabIndex = 14;
             label1.Text = "Price of the producto";
             // 
             // TxtPrice
             // 
-            TxtPrice.Location = new Point(691, 73);
+            TxtPrice.Location = new Point(790, 97);
+            TxtPrice.Margin = new Padding(3, 4, 3, 4);
             TxtPrice.Name = "TxtPrice";
-            TxtPrice.Size = new Size(133, 23);
+            TxtPrice.Size = new Size(151, 27);
             TxtPrice.TabIndex = 13;
             // 
             // LblName
             // 
             LblName.AutoSize = true;
-            LblName.Location = new Point(549, 36);
+            LblName.Location = new Point(627, 48);
             LblName.Name = "LblName";
-            LblName.Size = new Size(125, 15);
+            LblName.Size = new Size(157, 20);
             LblName.TabIndex = 12;
             LblName.Text = "Name of the producto";
             // 
             // TxtAddName
             // 
-            TxtAddName.Location = new Point(691, 36);
+            TxtAddName.Location = new Point(790, 48);
+            TxtAddName.Margin = new Padding(3, 4, 3, 4);
             TxtAddName.Name = "TxtAddName";
-            TxtAddName.Size = new Size(133, 23);
+            TxtAddName.Size = new Size(151, 27);
             TxtAddName.TabIndex = 11;
             // 
             // BtnReplace
             // 
-            BtnReplace.Location = new Point(924, 135);
+            BtnReplace.Location = new Point(1056, 180);
+            BtnReplace.Margin = new Padding(3, 4, 3, 4);
             BtnReplace.Name = "BtnReplace";
-            BtnReplace.Size = new Size(89, 33);
+            BtnReplace.Size = new Size(102, 44);
             BtnReplace.TabIndex = 19;
             BtnReplace.Text = "Replace ";
             BtnReplace.UseVisualStyleBackColor = true;
@@ -176,9 +185,10 @@
             // 
             // BtnDelete
             // 
-            BtnDelete.Location = new Point(924, 186);
+            BtnDelete.Location = new Point(1056, 248);
+            BtnDelete.Margin = new Padding(3, 4, 3, 4);
             BtnDelete.Name = "BtnDelete";
-            BtnDelete.Size = new Size(89, 33);
+            BtnDelete.Size = new Size(102, 44);
             BtnDelete.TabIndex = 20;
             BtnDelete.Text = "Delete";
             BtnDelete.UseVisualStyleBackColor = true;
@@ -186,9 +196,9 @@
             // 
             // Edit_Inventory
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1123, 503);
+            ClientSize = new Size(1283, 671);
             Controls.Add(BtnDelete);
             Controls.Add(BtnReplace);
             Controls.Add(label3);
@@ -202,6 +212,8 @@
             Controls.Add(PictureUser);
             Controls.Add(ListViewDataProduct);
             Controls.Add(BtnSeelct);
+            Margin = new Padding(3, 4, 3, 4);
+            Name = "Edit_Inventory";
             Text = "Products_sold";
             ((System.ComponentModel.ISupportInitialize)PictureUser).EndInit();
             ResumeLayout(false);

@@ -10,6 +10,7 @@ namespace inventor_manager
     {
         public string Name { get; }
 
+
         public int Stock
         {
             set
@@ -20,14 +21,17 @@ namespace inventor_manager
                 }
                 else
                 {
-                    throw new ArgumentOutOfRangeException("El Inventario no puede ser negativo");
+                    throw new ArgumentOutOfRangeException("Ya no hay mas productos en el inventario");
                 }
             }
         }
 
+
+
         public double Price { get; set; }
 
         private int quantity;
+
 
 
         // Constructor 
@@ -38,6 +42,8 @@ namespace inventor_manager
             quantity = 0;
         }
 
+
+
         // Constructor with Parameters
         public Producto_Sale(string name, double price, int quantity)
         {
@@ -45,6 +51,8 @@ namespace inventor_manager
             Price = price;
             Stock = quantity; // Enforces stock validation through the setter
         }
+
+
 
         // Method to Reduce Stock (assuming a sale)
         public void ReduceStock(int soldQuantity)
@@ -58,6 +66,8 @@ namespace inventor_manager
                 throw new ArgumentOutOfRangeException("Sold quantity cannot exceed available stock.");
             }
         }
+
+
 
         public override string ToString() 
         {

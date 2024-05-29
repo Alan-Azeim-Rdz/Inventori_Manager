@@ -80,12 +80,14 @@ namespace inventor_manager
 
         private void BtnSelection_Click(object sender, EventArgs e)
         {
+
             if (LstViewDataProductos.SelectedItems.Count > 0)
             {
                 var selectedItem = LstViewDataProductos.SelectedItems[0];
+                string Price_Rplace = selectedItem.SubItems[1].Text.Replace("$", "");
 
                 string productName = selectedItem.Text;
-                double productPrice = Convert.ToDouble(selectedItem.SubItems[1].Text);
+                double productPrice = Convert.ToDouble(Price_Rplace);
                 int productStock = Convert.ToInt32(selectedItem.SubItems[2].Text);
 
                 selectedProduct = new Producto_Sale(productName, productPrice, productStock);
@@ -432,6 +434,7 @@ namespace inventor_manager
                 string dataItem2 = ListVTicket.Items[i].SubItems[1].Text;
                 string dataItem3 = ListVTicket.Items[i].SubItems[2].Text;
                 string dataItem4 = ListVTicket.Items[i].SubItems[3].Text;
+
 
                 data[i, 0] = dataItem1;
                 data[i, 1] = dataItem2;

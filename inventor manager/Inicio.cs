@@ -26,6 +26,11 @@ namespace inventor_manager
 
         }
 
+
+
+
+
+
         private void BtnLogin_Click(object sender, EventArgs e)
         {
 
@@ -59,6 +64,11 @@ namespace inventor_manager
 
         }
 
+
+
+
+
+
         private void BtnUploadImage_Click(object sender, EventArgs e)
         {
             OpenFileDialog Images = new OpenFileDialog();
@@ -82,6 +92,11 @@ namespace inventor_manager
                 MessageBox.Show("Error loading image: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+
+
+
+
 
         private void BtnRegister_Click(object sender, EventArgs e)
         {
@@ -130,10 +145,19 @@ namespace inventor_manager
 
 
         }
+
+
+
+
+
         public static void ShowWelcomeMessage()
         {
             MessageBox.Show("¡Bienvenido al administrador de inventario!", "Bienvenido", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
+
+
+
         private void dateandtime()
         {
             MessageBox.Show("La fecha y hora actual es: " + DateTime.Now.ToString(), "Fecha y Hora", MessageBoxButtons.OK, MessageBoxIcon.None);
