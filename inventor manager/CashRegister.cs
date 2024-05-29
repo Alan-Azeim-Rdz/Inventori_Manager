@@ -1,25 +1,10 @@
 ﻿
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ClosedXML;
-using ClosedXML.Excel;
-using DocumentFormat.OpenXml.Spreadsheet;
-using OfficeOpenXml;
-using DocumentFormat.OpenXml;
-using DocumentFormat.OpenXml.Packaging;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
 using Newtonsoft.Json;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using OfficeOpenXml.Style.XmlAccess;
-
-
-
+using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Spreadsheet;
+using DocumentFormat.OpenXml;
 
 namespace inventor_manager
 {
@@ -37,8 +22,8 @@ namespace inventor_manager
             Filllistview();
         }
 
-        private Image receivedImage;
-        public Image ReceivedImage
+        private System.Drawing.Image receivedImage;
+        public System.Drawing.Image ReceivedImage
         {
             get { return receivedImage; }
             set
@@ -259,18 +244,172 @@ namespace inventor_manager
 
         }
 
+
+
+
+
+
+
+
+
+
         private void BtnTicketExcel_Click(object sender, EventArgs e)
         {
-            int itemCount = ListVTicket.Items.Count;
             string url_excel = "C:\\Users\\1gren\\Documents\\archivos_R\\Ticket.xlsx";
+            int itemCount = ListVTicket.Items.Count;
+            string[,] data = new string[itemCount, 4];
+
+            for (int i = 0; i < itemCount; i++)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+                    data[i, j] = ListVTicket.Items[i].SubItems[j].Text;
+                }
+            }
+
+            var saveFileDialog = new SaveFileDialog
+            {
+                Filter = "Excel files (*.xlsx)|*.xlsx",
+                FileName = "Datos.xlsx"
+            };
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                CreateExcelFile(saveFileDialog.FileName, data);
+                MessageBox.Show("Archivo Excel creado con éxito!");
+            }
+
+        }
+
+        private void CreateExcelFile(string filePath, string[,] data)
+        {
+            using (SpreadsheetDocument document = SpreadsheetDocument.Create(filePath, SpreadsheetDocumentType.Workbook))
+            {
+                // Crear la parte del libro de trabajo
+                WorkbookPart workbookPart = document.AddWorkbookPart();
+                workbookPart.Workbook = new Workbook();
+
+                // Crear la parte de la hoja de trabajo
+                WorksheetPart worksheetPart = workbookPart.AddNewPart<WorksheetPart>();
+                worksheetPart.Worksheet = new Worksheet(new SheetData());
+
+                // Crear hojas
+                Sheets sheets = document.WorkbookPart.Workbook.AppendChild(new Sheets());
+
+                // Crear una hoja de cálculo
+                Sheet sheet = new Sheet()
+                {
+                    Id = document.WorkbookPart.GetIdOfPart(worksheetPart),
+                    SheetId = 1,
+                    Name = "Hoja1"
+                };
+
+                sheets.Append(sheet);
+
+                // Llenar la hoja de cálculo con datos
+                SheetData sheetData = worksheetPart.Worksheet.GetFirstChild<SheetData>();
+
+                for (int row = 0; row < data.GetLength(0); row++)
+                {
+                    Row newRow = new Row();
+                    for (int col = 0; col < data.GetLength(1); col++)
+                    {
+                        Cell newCell = new Cell()
+                        {
+                            CellValue = new CellValue(data[row, col]),
+                            DataType = CellValues.String
+                        };
+                        newRow.Append(newCell);
+                    }
+                    sheetData.Append(newRow);
+                }
+
+                workbookPart.Workbook.Save();
+            }
+        }
+
+
+
+
+
+
+        private void BtnPdfTicket_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "PDF files (*.pdf)|*.pdf";
+            saveFileDialog.Title = "Guardar como PDF";
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                ExportToPdf(saveFileDialog.FileName);
+                MessageBox.Show("PDF creado exitosamente.");
+            }
+
+        }
+
+
+
+
+
+        private void ExportToPdf(string filePath)
+        {
+            iTextSharp.text.Document document = new iTextSharp.text.Document();
+            try
+            {
+                PdfWriter.GetInstance(document, new FileStream(filePath, FileMode.Create));
+                document.Open();
+
+                // Añadir el título del documento
+                document.Add(new iTextSharp.text.Paragraph("Datos del ListView"));
+                document.Add(new iTextSharp.text.Paragraph(" ")); // Espacio en blanco
+
+                // Crear una tabla con el número de columnas del ListView
+                PdfPTable table = new PdfPTable(ListVTicket.Columns.Count);
+
+                // Añadir los encabezados de las columnas
+                foreach (ColumnHeader column in ListVTicket.Columns)
+                {
+                    PdfPCell cell = new PdfPCell(new Phrase(column.Text));
+                    cell.BackgroundColor = BaseColor.LIGHT_GRAY;
+                    table.AddCell(cell);
+                }
+
+                // Añadir las filas de datos
+                foreach (ListViewItem item in ListVTicket.Items)
+                {
+                    foreach (ListViewItem.ListViewSubItem subItem in item.SubItems)
+                    {
+                        table.AddCell(subItem.Text);
+                    }
+                }
+
+                // Añadir la tabla al documento
+                document.Add(table);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al crear el PDF: {ex.Message}");
+            }
+            finally
+            {
+                document.Close();
+            }
+        }
+
+
+
+
+        private void BtnTicketWord_Click(object sender, EventArgs e)
+        {
+                        int itemCount = ListVTicket.Items.Count;
             string[,] data = new string[itemCount, 4];
 
 
             for (int i = 0; i < itemCount; i++)
             {
                 // Obtener los datos de cada elemento del ListView
-                string dataItem1 = ListVTicket.Items[i].SubItems[0].Text; 
-                string dataItem2 = ListVTicket.Items[i].SubItems[1].Text; 
+                string dataItem1 = ListVTicket.Items[i].SubItems[0].Text;
+                string dataItem2 = ListVTicket.Items[i].SubItems[1].Text;
                 string dataItem3 = ListVTicket.Items[i].SubItems[2].Text;
                 string dataItem4 = ListVTicket.Items[i].SubItems[3].Text;
 
@@ -279,49 +418,6 @@ namespace inventor_manager
                 data[i, 2] = dataItem3;
                 data[i, 3] = dataItem4;
             }
-            using (SpreadsheetDocument spreadsheetDocument = SpreadsheetDocument.Create(url_excel, SpreadsheetDocumentType.Workbook))
-            {
-                // Agregar una hoja de cálculo al documento
-                WorkbookPart workbookPart = spreadsheetDocument.AddWorkbookPart();
-                workbookPart.Workbook = new Workbook();
-
-                WorksheetPart worksheetPart = workbookPart.AddNewPart<WorksheetPart>();
-                worksheetPart.Worksheet = new Worksheet(new SheetData());
-
-                Sheets sheets = spreadsheetDocument.WorkbookPart.Workbook.AppendChild(new Sheets());
-                Sheet sheet = new Sheet() { Id = spreadsheetDocument.WorkbookPart.GetIdOfPart(worksheetPart), SheetId = 1, Name = "Sheet1" };
-                sheets.Append(sheet);
-
-                SheetData sheetData = worksheetPart.Worksheet.GetFirstChild<SheetData>();
-
-                // Escribir datos en la hoja de cálculo
-                for (int i = 0; i < data.GetLength(0); i++)
-                {
-                    Row row = new Row();
-                    for (int j = 0; j < data.GetLength(1); j++)
-                    {
-                        Cell cell = new Cell(new CellValue(data[i, j]));
-                        row.Append(cell);
-                    }
-                    sheetData.Append(row);
-                }
-                // Agregar texto adicional al final del archivo
-                Row additionalRow = new Row();
-                Cell additionalCell = new Cell(new CellValue(LblResult.Text));
-                additionalRow.Append(additionalCell);
-                sheetData.Append(additionalRow);
-
-            }
-
-            MessageBox.Show("Datos guardados en Excel correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-
-
-
-
         }
-
-
-
     }
 }

@@ -48,14 +48,17 @@
             BtnAdd = new Button();
             BtnTicketJason = new Button();
             BtnTicketExcel = new Button();
+            BtnPdfTicket = new Button();
+            BtnTicketWord = new Button();
             ((System.ComponentModel.ISupportInitialize)PictureUser).BeginInit();
             SuspendLayout();
             // 
             // PictureUser
             // 
-            PictureUser.Location = new Point(12, 12);
+            PictureUser.Location = new Point(14, 16);
+            PictureUser.Margin = new Padding(3, 4, 3, 4);
             PictureUser.Name = "PictureUser";
-            PictureUser.Size = new Size(55, 54);
+            PictureUser.Size = new Size(63, 72);
             PictureUser.SizeMode = PictureBoxSizeMode.StretchImage;
             PictureUser.TabIndex = 0;
             PictureUser.TabStop = false;
@@ -63,9 +66,10 @@
             // LstViewDataProductos
             // 
             LstViewDataProductos.Columns.AddRange(new ColumnHeader[] { columnHeader1, Price, columnHeader2, columnHeader3 });
-            LstViewDataProductos.Location = new Point(595, 12);
+            LstViewDataProductos.Location = new Point(680, 16);
+            LstViewDataProductos.Margin = new Padding(3, 4, 3, 4);
             LstViewDataProductos.Name = "LstViewDataProductos";
-            LstViewDataProductos.Size = new Size(505, 486);
+            LstViewDataProductos.Size = new Size(577, 647);
             LstViewDataProductos.TabIndex = 4;
             LstViewDataProductos.UseCompatibleStateImageBehavior = false;
             LstViewDataProductos.View = View.Details;
@@ -97,17 +101,18 @@
             // LblSelection
             // 
             LblSelection.AutoSize = true;
-            LblSelection.Location = new Point(258, 80);
+            LblSelection.Location = new Point(295, 107);
             LblSelection.Name = "LblSelection";
-            LblSelection.Size = new Size(55, 15);
+            LblSelection.Size = new Size(70, 20);
             LblSelection.TabIndex = 5;
             LblSelection.Text = "Selection";
             // 
             // BtnSelection
             // 
-            BtnSelection.Location = new Point(285, 173);
+            BtnSelection.Location = new Point(326, 231);
+            BtnSelection.Margin = new Padding(3, 4, 3, 4);
             BtnSelection.Name = "BtnSelection";
-            BtnSelection.Size = new Size(75, 23);
+            BtnSelection.Size = new Size(86, 31);
             BtnSelection.TabIndex = 6;
             BtnSelection.Text = "Select";
             BtnSelection.UseVisualStyleBackColor = true;
@@ -115,18 +120,19 @@
             // 
             // TxtQuantity
             // 
-            TxtQuantity.Location = new Point(209, 117);
+            TxtQuantity.Location = new Point(239, 156);
+            TxtQuantity.Margin = new Padding(3, 4, 3, 4);
             TxtQuantity.Name = "TxtQuantity";
-            TxtQuantity.Size = new Size(151, 23);
+            TxtQuantity.Size = new Size(172, 27);
             TxtQuantity.TabIndex = 7;
             // 
             // LblTotal
             // 
             LblTotal.AutoSize = true;
             LblTotal.Font = new Font("Rockwell", 15F);
-            LblTotal.Location = new Point(85, 529);
+            LblTotal.Location = new Point(97, 705);
             LblTotal.Name = "LblTotal";
-            LblTotal.Size = new Size(131, 22);
+            LblTotal.Size = new Size(162, 29);
             LblTotal.TabIndex = 8;
             LblTotal.Text = "total payable";
             // 
@@ -134,17 +140,18 @@
             // 
             LblResult.AutoSize = true;
             LblResult.Font = new Font("Segoe UI", 15F);
-            LblResult.Location = new Point(308, 524);
+            LblResult.Location = new Point(352, 699);
             LblResult.Name = "LblResult";
-            LblResult.Size = new Size(0, 28);
+            LblResult.Size = new Size(0, 35);
             LblResult.TabIndex = 9;
             // 
             // ListVTicket
             // 
             ListVTicket.Columns.AddRange(new ColumnHeader[] { columnHeader4, columnHeader5, columnHeader6, columnHeader7 });
-            ListVTicket.Location = new Point(29, 269);
+            ListVTicket.Location = new Point(33, 359);
+            ListVTicket.Margin = new Padding(3, 4, 3, 4);
             ListVTicket.Name = "ListVTicket";
-            ListVTicket.Size = new Size(505, 229);
+            ListVTicket.Size = new Size(577, 304);
             ListVTicket.TabIndex = 10;
             ListVTicket.UseCompatibleStateImageBehavior = false;
             ListVTicket.View = View.Details;
@@ -176,17 +183,18 @@
             // LblTiket
             // 
             LblTiket.AutoSize = true;
-            LblTiket.Location = new Point(29, 251);
+            LblTiket.Location = new Point(33, 335);
             LblTiket.Name = "LblTiket";
-            LblTiket.Size = new Size(32, 15);
+            LblTiket.Size = new Size(41, 20);
             LblTiket.TabIndex = 11;
             LblTiket.Text = "Tiket";
             // 
             // BtnAdd
             // 
-            BtnAdd.Location = new Point(204, 173);
+            BtnAdd.Location = new Point(233, 231);
+            BtnAdd.Margin = new Padding(3, 4, 3, 4);
             BtnAdd.Name = "BtnAdd";
-            BtnAdd.Size = new Size(75, 23);
+            BtnAdd.Size = new Size(86, 31);
             BtnAdd.TabIndex = 12;
             BtnAdd.Text = "Add";
             BtnAdd.UseVisualStyleBackColor = true;
@@ -194,9 +202,10 @@
             // 
             // BtnTicketJason
             // 
-            BtnTicketJason.Location = new Point(636, 519);
+            BtnTicketJason.Location = new Point(637, 689);
+            BtnTicketJason.Margin = new Padding(3, 4, 3, 4);
             BtnTicketJason.Name = "BtnTicketJason";
-            BtnTicketJason.Size = new Size(103, 47);
+            BtnTicketJason.Size = new Size(118, 63);
             BtnTicketJason.TabIndex = 13;
             BtnTicketJason.Text = "Print Ticket";
             BtnTicketJason.UseVisualStyleBackColor = true;
@@ -204,19 +213,44 @@
             // 
             // BtnTicketExcel
             // 
-            BtnTicketExcel.Location = new Point(756, 519);
+            BtnTicketExcel.Location = new Point(774, 689);
+            BtnTicketExcel.Margin = new Padding(3, 4, 3, 4);
             BtnTicketExcel.Name = "BtnTicketExcel";
-            BtnTicketExcel.Size = new Size(116, 47);
+            BtnTicketExcel.Size = new Size(133, 63);
             BtnTicketExcel.TabIndex = 14;
             BtnTicketExcel.Text = "Print Ticket (excel)";
             BtnTicketExcel.UseVisualStyleBackColor = true;
             BtnTicketExcel.Click += BtnTicketExcel_Click;
             // 
+            // BtnPdfTicket
+            // 
+            BtnPdfTicket.Location = new Point(924, 690);
+            BtnPdfTicket.Margin = new Padding(3, 4, 3, 4);
+            BtnPdfTicket.Name = "BtnPdfTicket";
+            BtnPdfTicket.Size = new Size(133, 63);
+            BtnPdfTicket.TabIndex = 15;
+            BtnPdfTicket.Text = "Print Ticket (Pdf)";
+            BtnPdfTicket.UseVisualStyleBackColor = true;
+            BtnPdfTicket.Click += BtnPdfTicket_Click;
+            // 
+            // BtnTicketWord
+            // 
+            BtnTicketWord.Location = new Point(1079, 689);
+            BtnTicketWord.Margin = new Padding(3, 4, 3, 4);
+            BtnTicketWord.Name = "BtnTicketWord";
+            BtnTicketWord.Size = new Size(133, 63);
+            BtnTicketWord.TabIndex = 16;
+            BtnTicketWord.Text = "Print Ticket (Word)";
+            BtnTicketWord.UseVisualStyleBackColor = true;
+            BtnTicketWord.Click += BtnTicketWord_Click;
+            // 
             // CashRegister
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1112, 577);
+            ClientSize = new Size(1271, 769);
+            Controls.Add(BtnTicketWord);
+            Controls.Add(BtnPdfTicket);
             Controls.Add(BtnTicketExcel);
             Controls.Add(BtnTicketJason);
             Controls.Add(BtnAdd);
@@ -229,6 +263,7 @@
             Controls.Add(LblSelection);
             Controls.Add(LstViewDataProductos);
             Controls.Add(PictureUser);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "CashRegister";
             Text = "cash register";
             ((System.ComponentModel.ISupportInitialize)PictureUser).EndInit();
@@ -258,5 +293,7 @@
         private Button BtnAdd;
         private Button BtnTicketJason;
         private Button BtnTicketExcel;
+        private Button BtnPdfTicket;
+        private Button BtnTicketWord;
     }
 }
