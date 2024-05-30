@@ -35,7 +35,6 @@
             columnHeader2 = new ColumnHeader();
             columnHeader3 = new ColumnHeader();
             LblSelection = new Label();
-            BtnSelection = new Button();
             TxtQuantity = new TextBox();
             LblTotal = new Label();
             LblResult = new Label();
@@ -44,11 +43,13 @@
             columnHeader5 = new ColumnHeader();
             columnHeader6 = new ColumnHeader();
             columnHeader7 = new ColumnHeader();
+            columnHeader8 = new ColumnHeader();
             LblTiket = new Label();
             BtnAdd = new Button();
             BtnTicketJason = new Button();
             BtnTicketExcel = new Button();
             BtnPdfTicket = new Button();
+            BtnRemove = new Button();
             ((System.ComponentModel.ISupportInitialize)PictureUser).BeginInit();
             SuspendLayout();
             // 
@@ -72,6 +73,7 @@
             LstViewDataProductos.TabIndex = 4;
             LstViewDataProductos.UseCompatibleStateImageBehavior = false;
             LstViewDataProductos.View = View.Details;
+            LstViewDataProductos.SelectedIndexChanged += LstViewDataProductos_SelectedIndexChanged;
             // 
             // columnHeader1
             // 
@@ -107,17 +109,6 @@
             LblSelection.Text = "Selection";
             LblSelection.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // BtnSelection
-            // 
-            BtnSelection.Location = new Point(326, 231);
-            BtnSelection.Margin = new Padding(3, 4, 3, 4);
-            BtnSelection.Name = "BtnSelection";
-            BtnSelection.Size = new Size(86, 31);
-            BtnSelection.TabIndex = 6;
-            BtnSelection.Text = "Select";
-            BtnSelection.UseVisualStyleBackColor = true;
-            BtnSelection.Click += BtnSelection_Click;
-            // 
             // TxtQuantity
             // 
             TxtQuantity.Location = new Point(239, 156);
@@ -130,7 +121,7 @@
             // 
             LblTotal.AutoSize = true;
             LblTotal.Font = new Font("Rockwell", 15F);
-            LblTotal.Location = new Point(97, 705);
+            LblTotal.Location = new Point(14, 624);
             LblTotal.Name = "LblTotal";
             LblTotal.Size = new Size(162, 29);
             LblTotal.TabIndex = 8;
@@ -140,18 +131,18 @@
             // 
             LblResult.AutoSize = true;
             LblResult.Font = new Font("Segoe UI", 15F);
-            LblResult.Location = new Point(352, 699);
+            LblResult.Location = new Point(269, 618);
             LblResult.Name = "LblResult";
             LblResult.Size = new Size(0, 35);
             LblResult.TabIndex = 9;
             // 
             // ListVTicket
             // 
-            ListVTicket.Columns.AddRange(new ColumnHeader[] { columnHeader4, columnHeader5, columnHeader6, columnHeader7 });
-            ListVTicket.Location = new Point(33, 359);
+            ListVTicket.Columns.AddRange(new ColumnHeader[] { columnHeader4, columnHeader5, columnHeader6, columnHeader7, columnHeader8 });
+            ListVTicket.Location = new Point(14, 295);
             ListVTicket.Margin = new Padding(3, 4, 3, 4);
             ListVTicket.Name = "ListVTicket";
-            ListVTicket.Size = new Size(577, 304);
+            ListVTicket.Size = new Size(627, 304);
             ListVTicket.TabIndex = 10;
             ListVTicket.UseCompatibleStateImageBehavior = false;
             ListVTicket.View = View.Details;
@@ -180,10 +171,15 @@
             columnHeader7.TextAlign = HorizontalAlignment.Center;
             columnHeader7.Width = 120;
             // 
+            // columnHeader8
+            // 
+            columnHeader8.Text = "Total";
+            columnHeader8.Width = 120;
+            // 
             // LblTiket
             // 
             LblTiket.AutoSize = true;
-            LblTiket.Location = new Point(33, 335);
+            LblTiket.Location = new Point(33, 271);
             LblTiket.Name = "LblTiket";
             LblTiket.Size = new Size(41, 20);
             LblTiket.TabIndex = 11;
@@ -191,7 +187,7 @@
             // 
             // BtnAdd
             // 
-            BtnAdd.Location = new Point(233, 231);
+            BtnAdd.Location = new Point(279, 207);
             BtnAdd.Margin = new Padding(3, 4, 3, 4);
             BtnAdd.Name = "BtnAdd";
             BtnAdd.Size = new Size(86, 31);
@@ -233,11 +229,23 @@
             BtnPdfTicket.UseVisualStyleBackColor = true;
             BtnPdfTicket.Click += BtnPdfTicket_Click;
             // 
+            // BtnRemove
+            // 
+            BtnRemove.Location = new Point(555, 618);
+            BtnRemove.Margin = new Padding(3, 4, 3, 4);
+            BtnRemove.Name = "BtnRemove";
+            BtnRemove.Size = new Size(86, 31);
+            BtnRemove.TabIndex = 16;
+            BtnRemove.Text = "Remove";
+            BtnRemove.UseVisualStyleBackColor = true;
+            BtnRemove.Click += BtnRemove_Click;
+            // 
             // CashRegister
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1271, 769);
+            Controls.Add(BtnRemove);
             Controls.Add(BtnPdfTicket);
             Controls.Add(BtnTicketExcel);
             Controls.Add(BtnTicketJason);
@@ -247,7 +255,6 @@
             Controls.Add(LblResult);
             Controls.Add(LblTotal);
             Controls.Add(TxtQuantity);
-            Controls.Add(BtnSelection);
             Controls.Add(LblSelection);
             Controls.Add(LstViewDataProductos);
             Controls.Add(PictureUser);
@@ -268,7 +275,6 @@
         private ColumnHeader columnHeader2;
         private ColumnHeader columnHeader3;
         private Label LblSelection;
-        private Button BtnSelection;
         private TextBox TxtQuantity;
         private Label LblTotal;
         private Label LblResult;
@@ -282,5 +288,7 @@
         private Button BtnTicketJason;
         private Button BtnTicketExcel;
         private Button BtnPdfTicket;
+        private ColumnHeader columnHeader8;
+        private Button BtnRemove;
     }
 }

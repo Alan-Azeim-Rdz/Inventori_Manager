@@ -4,8 +4,7 @@ using Newtonsoft.Json;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
 using DocumentFormat.OpenXml;
-using DocumentFormat.OpenXml.Wordprocessing;
-using Paragraph = iTextSharp.text.Paragraph;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 
 namespace inventor_manager
@@ -80,34 +79,6 @@ namespace inventor_manager
 
 
 
-        private void BtnSelection_Click(object sender, EventArgs e)
-        {
-
-            if (LstViewDataProductos.SelectedItems.Count > 0)
-            {
-                var selectedItem = LstViewDataProductos.SelectedItems[0];
-                string Price_Rplace = selectedItem.SubItems[1].Text.Replace("$", "");
-
-                string productName = selectedItem.Text;
-                double productPrice = Convert.ToDouble(Price_Rplace);
-                int productStock = Convert.ToInt32(selectedItem.SubItems[2].Text);
-
-                selectedProduct = new Product_Sale(productName, productPrice, productStock);
-                LblSelection.Text = selectedProduct.ToString();
-                selectedProductStock = productStock;
-
-            }
-            else
-            {
-                selectedProduct = new Product_Sale();
-                MessageBox.Show("Seleccione un ítem para editar. No puede estar vacio " + selectedProduct);
-            }
-
-
-        }
-
-
-
 
 
 
@@ -131,7 +102,7 @@ namespace inventor_manager
                     {
                         // Update total result
                         resultFinish += CalculateTotalResult(selectedProduct, quantityToSell);
-                        LblResult.Text = "$ " + Convert.ToString( resultFinish);
+                        LblResult.Text = "$ " + Convert.ToString(resultFinish);
 
 
                         // Update ListView ticket
@@ -140,6 +111,7 @@ namespace inventor_manager
                         itemTicket.SubItems.Add(selectedProduct.Price.ToString());
                         itemTicket.SubItems.Add(quantityToSell.ToString());
                         itemTicket.SubItems.Add(mark); // Assuming discount is 0
+                        itemTicket.SubItems.Add(Convert.ToString(CalculateTotalResult(selectedProduct, quantityToSell)));
 
                         // Update product stock
                         selectedProduct.ReduceStock((quantityToSell));
@@ -248,19 +220,20 @@ namespace inventor_manager
                 List<Dictionary<string, object>> productList = new List<Dictionary<string, object>>();
 
                 // Extract and format product data from ListView items
-                foreach (ListViewItem item in ListVTicket .Items)
+                foreach (ListViewItem item in ListVTicket.Items)
                 {
                     Dictionary<string, object> productData = new Dictionary<string, object>();
                     productData.Add("Nombre", item.Text);
                     productData.Add("Precio", item.SubItems[1].Text);
                     productData.Add("Stock", item.SubItems[2].Text);
                     productData.Add("Marca", item.SubItems[3].Text);
+                    productData.Add("Total", item.SubItems[4].Text);
 
 
                     productList.Add(productData);
                 }
                 Dictionary<string, object> productData2 = new Dictionary<string, object>();
-                productData2.Add("Total", LblResult.Text);
+                productData2.Add("Total a pagar", LblResult.Text);
                 productList.Add(productData2);
 
                 string jsonString = JsonConvert.SerializeObject(productList, Formatting.Indented);
@@ -288,11 +261,11 @@ namespace inventor_manager
         private void BtnTicketExcel_Click(object sender, EventArgs e)
         {
             int itemCount = ListVTicket.Items.Count;
-            string[,] data = new string[itemCount, 4];
+            string[,] data = new string[itemCount, 5];
 
             for (int i = 0; i < itemCount; i++)
             {
-                for (int j = 0; j < 4; j++)
+                for (int j = 0; j < 5; j++)
                 {
                     data[i, j] = ListVTicket.Items[i].SubItems[j].Text;
                 }
@@ -356,8 +329,26 @@ namespace inventor_manager
                     }
                     sheetData.Append(newRow);
                 }
+                // Agregar "Gracias" al final
+                Row Total_Price = new Row();
+                Cell Celd_Total_price = new Cell()
+                {
+                    CellValue = new CellValue("Total a pagar"),
+                    DataType = CellValues.String
+                };
+                Total_Price.Append(Celd_Total_price);
+                Cell numberCell = new Cell()
+                {
+                    CellValue = new CellValue(LblResult.Text),
+                    DataType = CellValues.String
+                };
+                Total_Price.Append(numberCell);
+
+                sheetData.Append(Total_Price);
+
 
                 workbookPart.Workbook.Save();
+
             }
         }
 
@@ -393,7 +384,7 @@ namespace inventor_manager
                 document.Open();
 
                 // Añadir el título del documento
-                document.Add(new iTextSharp.text.Paragraph("Total " + LblResult.Text ));
+                document.Add(new iTextSharp.text.Paragraph("Ticket"));
                 document.Add(new iTextSharp.text.Paragraph(" ")); // Espacio en blanco
 
                 // Crear una tabla con el número de columnas del ListView
@@ -418,6 +409,7 @@ namespace inventor_manager
 
                 // Añadir la tabla al documento
                 document.Add(table);
+                document.Add(new iTextSharp.text.Paragraph("Total a pagar " + LblResult.Text));
             }
             catch (Exception ex)
             {
@@ -429,5 +421,50 @@ namespace inventor_manager
             }
         }
 
+        private void LstViewDataProductos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (LstViewDataProductos.SelectedItems.Count > 0)
+            {
+                var selectedItem = LstViewDataProductos.SelectedItems[0];
+                string priceRplace = selectedItem.SubItems[1].Text.Replace("$", "");
+
+                string productName = selectedItem.Text;
+                double productPrice = Convert.ToDouble(priceRplace);
+                int productStock = Convert.ToInt32(selectedItem.SubItems[2].Text);
+
+                selectedProduct = new Product_Sale(productName, productPrice, productStock);
+                LblSelection.Text = selectedProduct.ToString();
+                selectedProductStock = productStock;
+
+                // Add any additional actions you want to perform on item selection here
+            }
+        }
+
+        private void BtnRemove_Click(object sender, EventArgs e)
+        {
+            // Verificar si hay un elemento seleccionado
+            if (ListVTicket.SelectedItems.Count > 0)
+            {
+                // Obtener el elemento seleccionado
+                var selectedItem = ListVTicket.SelectedItems[0];
+
+                // Extraer la información del producto
+                string productName = selectedItem.Text;
+                int prodct_price = Convert.ToInt32(selectedItem.SubItems[4].Text);
+
+                // Eliminar el elemento seleccionado del ListView
+                ListVTicket.Items.Remove(selectedItem);
+
+                // Actualizar el total a pagar
+                double currentTotal = Convert.ToDouble(LblResult.Text.Replace("$", ""));
+                resultFinish = Convert.ToInt32(currentTotal - prodct_price);
+                LblResult.Text = Convert.ToString( resultFinish ) ;
+                
+            }
+            else
+            {
+                MessageBox.Show("Seleccione un ítem para eliminar. No puede estar vacio");
+            }
+        }
     }
 }

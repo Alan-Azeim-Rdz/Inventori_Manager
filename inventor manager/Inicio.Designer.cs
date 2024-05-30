@@ -89,7 +89,7 @@
             PicturEmplayPhoto.Location = new Point(611, 43);
             PicturEmplayPhoto.Name = "PicturEmplayPhoto";
             PicturEmplayPhoto.Size = new Size(232, 256);
-            PicturEmplayPhoto.SizeMode = PictureBoxSizeMode.Zoom;
+            PicturEmplayPhoto.SizeMode = PictureBoxSizeMode.StretchImage;
             PicturEmplayPhoto.TabIndex = 5;
             PicturEmplayPhoto.TabStop = false;
             // 
