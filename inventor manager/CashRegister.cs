@@ -4,6 +4,8 @@ using Newtonsoft.Json;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
 using DocumentFormat.OpenXml;
+using DocumentFormat.OpenXml.Wordprocessing;
+using Paragraph = iTextSharp.text.Paragraph;
 
 
 namespace inventor_manager
@@ -246,16 +248,19 @@ namespace inventor_manager
                 List<Dictionary<string, object>> productList = new List<Dictionary<string, object>>();
 
                 // Extract and format product data from ListView items
-                foreach (ListViewItem item in LstViewDataProductos.Items)
+                foreach (ListViewItem item in ListVTicket .Items)
                 {
                     Dictionary<string, object> productData = new Dictionary<string, object>();
                     productData.Add("Nombre", item.Text);
                     productData.Add("Precio", item.SubItems[1].Text);
                     productData.Add("Stock", item.SubItems[2].Text);
 
+
                     productList.Add(productData);
                 }
-
+                Dictionary<string, object> productData2 = new Dictionary<string, object>();
+                productData2.Add("Total", LblResult.Text);
+                productList.Add(productData2);
 
                 string jsonString = JsonConvert.SerializeObject(productList, Formatting.Indented);
 
@@ -281,7 +286,6 @@ namespace inventor_manager
 
         private void BtnTicketExcel_Click(object sender, EventArgs e)
         {
-            string url_excel = "C:\\Users\\1gren\\Documents\\archivos_R\\Ticket.xlsx";
             int itemCount = ListVTicket.Items.Count;
             string[,] data = new string[itemCount, 4];
 
@@ -388,7 +392,7 @@ namespace inventor_manager
                 document.Open();
 
                 // Añadir el título del documento
-                document.Add(new iTextSharp.text.Paragraph("Datos del ListView"));
+                document.Add(new iTextSharp.text.Paragraph("Total " + LblResult.Text ));
                 document.Add(new iTextSharp.text.Paragraph(" ")); // Espacio en blanco
 
                 // Crear una tabla con el número de columnas del ListView

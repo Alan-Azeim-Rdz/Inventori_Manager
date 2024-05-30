@@ -13,6 +13,7 @@ namespace inventor_manager
         public Add_nventory()
         {
             InitializeComponent();
+            Filllistview();
 
         }
         private Image receivedImage;
@@ -118,6 +119,41 @@ namespace inventor_manager
             }
 
             return MessageBox.Show("los productos que se encuentran registrados en el almacen ahora son " +(Convert.ToString(totalProductos.ToString())));
+        }
+        private void Filllistview()
+        {
+            try
+            {
+                if (File.Exists(Url_txt_productos))
+                {
+                    // Leer todas las líneas del archivo
+                    string[] lineas = File.ReadAllLines(Url_txt_productos);
+
+                    // Agregar cada línea como un elemento al ListView
+                    foreach (string linea in lineas)
+                    {
+                        string[] partes = linea.Split(' ');
+
+                        ListViewItem item = new ListViewItem(partes[0]);
+                        for (int i = 1; i < partes.Length
+                            ; i++)
+                        {
+                            item.SubItems.Add(partes[i]);
+                        }
+
+                        // Agregar el item al ListView
+                        LstViewDataProductos.Items.Add(item);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("El archivo no existe en la ruta especificada.", "Archivo no encontrado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al leer el archivo: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
     }
