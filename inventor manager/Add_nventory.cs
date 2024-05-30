@@ -91,8 +91,8 @@ namespace inventor_manager
         private void BtnQuantityProductTotal_Click(object sender, EventArgs e)
         {
             ObtenerCantidadProductosTotales();
-        }
 
+        }
         public DialogResult ObtenerCantidadProductosTotales()
         {
             int totalProductos = 0;

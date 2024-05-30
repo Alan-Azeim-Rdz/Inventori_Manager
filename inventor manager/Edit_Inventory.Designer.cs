@@ -213,7 +213,6 @@
             Controls.Add(ListViewDataProduct);
             Controls.Add(BtnSeelct);
             Margin = new Padding(3, 4, 3, 4);
-            Name = "Edit_Inventory";
             Text = "Products_sold";
             ((System.ComponentModel.ISupportInitialize)PictureUser).EndInit();
             ResumeLayout(false);

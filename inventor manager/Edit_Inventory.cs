@@ -154,18 +154,6 @@ namespace inventor_manager
         {
             using (StreamWriter writer = new StreamWriter(filePath, false))
             {
-                //// Write the header row if it exists
-                //if (listView.Columns.Count > 0)
-                //{
-                //    string headerRow = "";
-                //    foreach (ColumnHeader column in listView.Columns)
-                //    {
-                //        headerRow += column.Text + " ";
-                //    }
-                //    writer.WriteLine(headerRow.Trim());
-                //}
-
-                // Write each remaining item's data
                 foreach (ListViewItem item in listView.Items)
                 {
                     string dataRow = "";

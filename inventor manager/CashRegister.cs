@@ -1,17 +1,17 @@
-﻿
-using iTextSharp.text;
+﻿using iTextSharp.text;
 using iTextSharp.text.pdf;
 using Newtonsoft.Json;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
 using DocumentFormat.OpenXml;
 
+
 namespace inventor_manager
 {
     public partial class CashRegister : Form
 
     {
-        Producto_Sale selectedProduct;
+        Product_Sale selectedProduct;
         int selectedProductStock;
         int resultFinish = 0;
 
@@ -90,14 +90,15 @@ namespace inventor_manager
                 double productPrice = Convert.ToDouble(Price_Rplace);
                 int productStock = Convert.ToInt32(selectedItem.SubItems[2].Text);
 
-                selectedProduct = new Producto_Sale(productName, productPrice, productStock);
+                selectedProduct = new Product_Sale(productName, productPrice, productStock);
                 LblSelection.Text = selectedProduct.ToString();
                 selectedProductStock = productStock;
 
             }
             else
             {
-                MessageBox.Show("Seleccione un ítem para editar.");
+                selectedProduct = new Product_Sale();
+                MessageBox.Show("Seleccione un ítem para editar. No puede estar vacio " + selectedProduct);
             }
 
 
@@ -117,6 +118,7 @@ namespace inventor_manager
                 var selectedItem = LstViewDataProductos.SelectedItems[0];
                 int Price = Convert.ToInt32(selectedItem.SubItems[1].Text);
                 int Quantity = Convert.ToInt32(selectedItem.SubItems[2].Text);
+                string mark = selectedItem.SubItems[3].Text;
 
                 try
                 {
@@ -126,15 +128,16 @@ namespace inventor_manager
                     if (quantityToSell <= selectedProductStock)
                     {
                         // Update total result
-                        resultFinish += (int)(selectedProduct.Price * quantityToSell);
-                        LblResult.Text = "$ " + resultFinish;
+                        resultFinish += CalculateTotalResult(selectedProduct, quantityToSell);
+                        LblResult.Text = "$ " + Convert.ToString( resultFinish);
+
 
                         // Update ListView ticket
                         ListViewItem itemTicket = new ListViewItem(selectedProduct.Name);
                         ListVTicket.Items.Add(itemTicket);
                         itemTicket.SubItems.Add(selectedProduct.Price.ToString());
                         itemTicket.SubItems.Add(quantityToSell.ToString());
-                        itemTicket.SubItems.Add(selectedProduct.Price.ToString()); // Assuming discount is 0
+                        itemTicket.SubItems.Add(mark); // Assuming discount is 0
 
                         // Update product stock
                         selectedProduct.ReduceStock((quantityToSell));
@@ -176,6 +179,12 @@ namespace inventor_manager
 
 
 
+        }
+
+        private int CalculateTotalResult(Product_Sale selectedProduct, int quantityToSell)
+        {
+            int totalResult = (int)(selectedProduct.Price * quantityToSell);
+            return totalResult;
         }
 
 
@@ -420,7 +429,7 @@ namespace inventor_manager
 
         private void BtnTicketWord_Click(object sender, EventArgs e)
         {
-                        int itemCount = ListVTicket.Items.Count;
+            int itemCount = ListVTicket.Items.Count;
             string[,] data = new string[itemCount, 4];
 
 
@@ -438,6 +447,12 @@ namespace inventor_manager
                 data[i, 2] = dataItem3;
                 data[i, 3] = dataItem4;
             }
+           
+
+        }
+        private void ExportarDatosWord(int[,] datos, string rutaArchivo)
+        {
+
         }
     }
 }

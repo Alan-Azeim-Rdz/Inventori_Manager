@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace inventor_manager
 {
-    internal class Producto_Sale
+    internal class Product_Sale
     {
         public string Name { get; }
 
@@ -28,7 +28,7 @@ namespace inventor_manager
 
 
         // Constructor 
-        public Producto_Sale()
+        public Product_Sale()
         {
             Name = "";
             Price = 0;
@@ -38,7 +38,7 @@ namespace inventor_manager
 
 
         // Constructor with Parameters
-        public Producto_Sale(string name, double price, int quantity)
+        public Product_Sale(string name, double price, int quantity)
         {
             Name = name;
             Price = price;

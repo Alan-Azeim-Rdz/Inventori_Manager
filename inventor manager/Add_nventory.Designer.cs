@@ -43,7 +43,6 @@
             label3 = new Label();
             TxtMark = new TextBox();
             PicturUser = new PictureBox();
-            BtnHome = new Button();
             BtnQuantityProductTotal = new Button();
             ((System.ComponentModel.ISupportInitialize)PicturUser).BeginInit();
             SuspendLayout();
@@ -172,17 +171,6 @@
             PicturUser.TabIndex = 10;
             PicturUser.TabStop = false;
             // 
-            // BtnHome
-            // 
-            BtnHome.Location = new Point(14, 680);
-            BtnHome.Margin = new Padding(3, 4, 3, 4);
-            BtnHome.Name = "BtnHome";
-            BtnHome.Size = new Size(86, 31);
-            BtnHome.TabIndex = 11;
-            BtnHome.Text = "Home";
-            BtnHome.UseVisualStyleBackColor = true;
-            BtnHome.Click += BtnHome_Click;
-            // 
             // BtnQuantityProductTotal
             // 
             BtnQuantityProductTotal.Location = new Point(502, 620);
@@ -200,7 +188,6 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1322, 727);
             Controls.Add(BtnQuantityProductTotal);
-            Controls.Add(BtnHome);
             Controls.Add(PicturUser);
             Controls.Add(label3);
             Controls.Add(TxtMark);
@@ -237,7 +224,6 @@
         private Label label3;
         private TextBox TxtMark;
         private PictureBox PicturUser;
-        private Button BtnHome;
         private Button BtnQuantityProductTotal;
     }
 }

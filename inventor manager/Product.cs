@@ -46,7 +46,7 @@ namespace inventor_manager
 
         public override string ToString()
         {
-            return "$" + _price + " " + _quantity  +" "+ _mark.Replace(" ","-");
+            return  _price + " " + _quantity  +" "+ _mark.Replace(" ","-");
         }
     }
 }
