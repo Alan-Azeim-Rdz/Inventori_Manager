@@ -49,7 +49,6 @@
             BtnTicketJason = new Button();
             BtnTicketExcel = new Button();
             BtnPdfTicket = new Button();
-            BtnTicketWord = new Button();
             ((System.ComponentModel.ISupportInitialize)PictureUser).BeginInit();
             SuspendLayout();
             // 
@@ -203,7 +202,7 @@
             // 
             // BtnTicketJason
             // 
-            BtnTicketJason.Location = new Point(637, 689);
+            BtnTicketJason.Location = new Point(747, 688);
             BtnTicketJason.Margin = new Padding(3, 4, 3, 4);
             BtnTicketJason.Name = "BtnTicketJason";
             BtnTicketJason.Size = new Size(118, 63);
@@ -214,7 +213,7 @@
             // 
             // BtnTicketExcel
             // 
-            BtnTicketExcel.Location = new Point(774, 689);
+            BtnTicketExcel.Location = new Point(884, 688);
             BtnTicketExcel.Margin = new Padding(3, 4, 3, 4);
             BtnTicketExcel.Name = "BtnTicketExcel";
             BtnTicketExcel.Size = new Size(133, 63);
@@ -225,7 +224,7 @@
             // 
             // BtnPdfTicket
             // 
-            BtnPdfTicket.Location = new Point(923, 691);
+            BtnPdfTicket.Location = new Point(1033, 690);
             BtnPdfTicket.Margin = new Padding(3, 4, 3, 4);
             BtnPdfTicket.Name = "BtnPdfTicket";
             BtnPdfTicket.Size = new Size(133, 63);
@@ -234,23 +233,11 @@
             BtnPdfTicket.UseVisualStyleBackColor = true;
             BtnPdfTicket.Click += BtnPdfTicket_Click;
             // 
-            // BtnTicketWord
-            // 
-            BtnTicketWord.Location = new Point(1079, 689);
-            BtnTicketWord.Margin = new Padding(3, 4, 3, 4);
-            BtnTicketWord.Name = "BtnTicketWord";
-            BtnTicketWord.Size = new Size(133, 63);
-            BtnTicketWord.TabIndex = 16;
-            BtnTicketWord.Text = "Print Ticket (Word)";
-            BtnTicketWord.UseVisualStyleBackColor = true;
-            BtnTicketWord.Click += BtnTicketWord_Click;
-            // 
             // CashRegister
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1271, 769);
-            Controls.Add(BtnTicketWord);
             Controls.Add(BtnPdfTicket);
             Controls.Add(BtnTicketExcel);
             Controls.Add(BtnTicketJason);
@@ -295,6 +282,5 @@
         private Button BtnTicketJason;
         private Button BtnTicketExcel;
         private Button BtnPdfTicket;
-        private Button BtnTicketWord;
     }
 }

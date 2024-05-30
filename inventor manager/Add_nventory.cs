@@ -53,11 +53,10 @@ namespace inventor_manager
                         // Escribe el contenido en el archivo especificado
                         File.AppendAllText(Url_txt_productos, product_for_txt + Environment.NewLine);
 
-                        Console.WriteLine("El archivo se ha guardado correctamente en: " + product_for_txt);
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine("Error al guardar el archivo: " + ex.Message);
+                        MessageBox.Show("Error al guardar el archivo: " + ex.Message);
                     }
 
                 }

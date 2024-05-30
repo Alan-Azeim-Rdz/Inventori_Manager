@@ -104,7 +104,7 @@ namespace inventor_manager
                         {
                             // Construir una cadena con todos los datos del elemento separados por espacios
                             string line = $"{item.Text} {item.SubItems[1].Text} {item.SubItems[2].Text} {item.SubItems[3].Text}";
-                            writer.WriteLine(line); // Escribir la línea en el archivo
+                            writer.WriteLine(line); 
                         }
                     }
 

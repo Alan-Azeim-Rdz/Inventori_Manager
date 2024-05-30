@@ -254,6 +254,7 @@ namespace inventor_manager
                     productData.Add("Nombre", item.Text);
                     productData.Add("Precio", item.SubItems[1].Text);
                     productData.Add("Stock", item.SubItems[2].Text);
+                    productData.Add("Marca", item.SubItems[3].Text);
 
 
                     productList.Add(productData);
@@ -333,7 +334,7 @@ namespace inventor_manager
                 {
                     Id = document.WorkbookPart.GetIdOfPart(worksheetPart),
                     SheetId = 1,
-                    Name = "Hoja1"
+                    Name = "Ticket"
                 };
 
                 sheets.Append(sheet);
@@ -428,35 +429,5 @@ namespace inventor_manager
             }
         }
 
-
-
-
-        private void BtnTicketWord_Click(object sender, EventArgs e)
-        {
-            int itemCount = ListVTicket.Items.Count;
-            string[,] data = new string[itemCount, 4];
-
-
-            for (int i = 0; i < itemCount; i++)
-            {
-                // Obtener los datos de cada elemento del ListView
-                string dataItem1 = ListVTicket.Items[i].SubItems[0].Text;
-                string dataItem2 = ListVTicket.Items[i].SubItems[1].Text;
-                string dataItem3 = ListVTicket.Items[i].SubItems[2].Text;
-                string dataItem4 = ListVTicket.Items[i].SubItems[3].Text;
-
-
-                data[i, 0] = dataItem1;
-                data[i, 1] = dataItem2;
-                data[i, 2] = dataItem3;
-                data[i, 3] = dataItem4;
-            }
-           
-
-        }
-        private void ExportarDatosWord(int[,] datos, string rutaArchivo)
-        {
-
-        }
     }
 }
