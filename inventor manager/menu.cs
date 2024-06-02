@@ -27,13 +27,6 @@ namespace inventor_manager
             }
         }
 
-        private void BtnInventory_Click(object sender, EventArgs e)
-        {
-            Add_nventory form1 = new Add_nventory();
-            form1.Show();
-            form1.ReceivedImage = PictureImagePhoto.Image;
-        }
-
         private void BtnSouldProduct_Click(object sender, EventArgs e)
         {
             Edit_Inventory products_Sold = new Edit_Inventory();

@@ -425,6 +425,8 @@ namespace inventor_manager
         {
             if (LstViewDataProductos.SelectedItems.Count > 0)
             {
+                LstViewDataProductos.FullRowSelect = true;
+
                 var selectedItem = LstViewDataProductos.SelectedItems[0];
                 string priceRplace = selectedItem.SubItems[1].Text.Replace("$", "");
 
@@ -435,8 +437,6 @@ namespace inventor_manager
                 selectedProduct = new Product_Sale(productName, productPrice, productStock);
                 LblSelection.Text = selectedProduct.ToString();
                 selectedProductStock = productStock;
-
-                // Add any additional actions you want to perform on item selection here
             }
         }
 
@@ -458,13 +458,18 @@ namespace inventor_manager
                 // Actualizar el total a pagar
                 double currentTotal = Convert.ToDouble(LblResult.Text.Replace("$", ""));
                 resultFinish = Convert.ToInt32(currentTotal - prodct_price);
-                LblResult.Text = Convert.ToString( resultFinish ) ;
-                
+                LblResult.Text = Convert.ToString(resultFinish);
+
             }
             else
             {
                 MessageBox.Show("Seleccione un ítem para eliminar. No puede estar vacio");
             }
+        }
+
+        private void ListVTicket_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
