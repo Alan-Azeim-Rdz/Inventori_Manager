@@ -12,7 +12,7 @@ namespace inventor_manager
     public partial class CashRegister : Form
 
     {
-        Product_Sale selectedProduct;
+        Product_Sale selectedProduct ;
         int selectedProductStock;
         double resultFinish = 0;
 
@@ -261,9 +261,10 @@ namespace inventor_manager
 
         private void BtnTicketJason_Click(object sender, EventArgs e)
         {
-            if (LstViewDataProductos.Items.Count == 0)
+            if (ListVTicket.Items.Count == 0)
             {
-                MessageBox.Show("No hay elementos en la lista para convertir a JSON.", "Lista vacía", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                selectedProduct= new Product_Sale();
+                MessageBox.Show(selectedProduct.ToString() + " No hay elementos en la lista para convertir a JSON.", "Lista vacía", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -313,6 +314,14 @@ namespace inventor_manager
 
         private void BtnTicketExcel_Click(object sender, EventArgs e)
         {
+            if (ListVTicket.Items.Count == 0)
+            {
+                selectedProduct = new Product_Sale();
+                MessageBox.Show(selectedProduct.ToString() + " No hay elementos en la lista para convertir a Xlsx.", "Lista vacía", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+
             int itemCount = ListVTicket.Items.Count;
             string[,] data = new string[itemCount, 5];
 
@@ -412,6 +421,14 @@ namespace inventor_manager
 
         private void BtnPdfTicket_Click(object sender, EventArgs e)
         {
+            if (ListVTicket.Items.Count == 0)
+            {
+                selectedProduct = new Product_Sale();
+                MessageBox.Show(selectedProduct.ToString() + " No hay elementos en la lista para convertir a PDF.", "Lista vacía", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "PDF files (*.pdf)|*.pdf";
             saveFileDialog.Title = "Guardar como PDF";
