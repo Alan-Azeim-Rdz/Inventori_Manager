@@ -60,6 +60,12 @@ namespace inventor_manager
             }
         }
 
+        // Method to Increase Stock (e.g., if a sale is removed)
+        public void IncreaseStock(int quantityToAdd)
+        {
+            quantity += quantityToAdd;
+        }
+
 
 
         public override string ToString() 

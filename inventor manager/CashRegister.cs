@@ -14,7 +14,7 @@ namespace inventor_manager
     {
         Product_Sale selectedProduct;
         int selectedProductStock;
-        int resultFinish = 0;
+        double resultFinish = 0;
 
 
 
@@ -89,8 +89,7 @@ namespace inventor_manager
             {
                 // Obtener el elemento seleccionado
                 var selectedItem = LstViewDataProductos.SelectedItems[0];
-                int Price = Convert.ToInt32(selectedItem.SubItems[1].Text);
-                int Quantity = Convert.ToInt32(selectedItem.SubItems[2].Text);
+                int quantity = Convert.ToInt32(TxtQuantity.Text);
                 string mark = selectedItem.SubItems[3].Text;
 
                 try
@@ -100,18 +99,59 @@ namespace inventor_manager
                     // Validate quantity to sell against available stock
                     if (quantityToSell <= selectedProductStock)
                     {
-                        // Update total result
-                        resultFinish += CalculateTotalResult(selectedProduct, quantityToSell);
-                        LblResult.Text = "$ " + Convert.ToString(resultFinish);
+                        // Verificar si se alcanza la cantidad para aplicar el descuento
+                        int discountQuantityThreshold = 30; 
+
+                        if (quantityToSell >= discountQuantityThreshold)
+                        {
+                            double discountPercentage = 0.1; // 10% de descuento
+                            int remainingQuantity = quantityToSell % discountQuantityThreshold;
+
+                            // Crear un producto con descuento
+                            DiscountedProduct_Sale discountedProduct = new DiscountedProduct_Sale(selectedProduct.Name, selectedProduct.Price, quantityToSell, discountPercentage);
+
+                            // Calcular el total con descuento
+                            double discountedTotal = CalculateTotalResult(discountedProduct, quantityToSell);
+
+                            // Actualizar total result
+                            resultFinish += discountedTotal;
+                            LblResult.Text = "$ " + Convert.ToString(resultFinish);
+
+                            // Agregar el producto con descuento al ticket
+                            ListViewItem itemDiscounted = new ListViewItem(discountedProduct.Name + " (con descuento)");
+                            MessageBox.Show("el prodcuto " + selectedProduct.Name + " tiene un descuento del 10% en cada producto por comprar mas de 30 de estos");
+                            ListVTicket.Items.Add(itemDiscounted);
+                            itemDiscounted.SubItems.Add(discountedProduct.Price.ToString());
+                            itemDiscounted.SubItems.Add(quantityToSell.ToString());
+                            itemDiscounted.SubItems.Add(mark); // Assuming discount is 0
+                            itemDiscounted.SubItems.Add(Convert.ToString(discountedTotal));
 
 
-                        // Update ListView ticket
-                        ListViewItem itemTicket = new ListViewItem(selectedProduct.Name);
-                        ListVTicket.Items.Add(itemTicket);
-                        itemTicket.SubItems.Add(selectedProduct.Price.ToString());
-                        itemTicket.SubItems.Add(quantityToSell.ToString());
-                        itemTicket.SubItems.Add(mark); // Assuming discount is 0
-                        itemTicket.SubItems.Add(Convert.ToString(CalculateTotalResult(selectedProduct, quantityToSell)));
+                        }
+                        else
+                        {
+                            // Update total result
+                            resultFinish += CalculateTotalResult(selectedProduct, quantityToSell);
+                            LblResult.Text = "$ " + Convert.ToString(resultFinish);
+
+                            // Check if the product is discounted
+                            if (selectedProduct is DiscountedProduct_Sale discountedProduct)
+                            {
+                                // Calculate discounted total result
+                                resultFinish += CalculateTotalResult(selectedProduct, quantityToSell, discountedProduct.DiscountPercentage);
+                                LblResult.Text = "$ " + Convert.ToString(resultFinish);
+                            }
+
+                            // Update ListView ticket
+                            ListViewItem itemTicket = new ListViewItem(selectedProduct.Name);
+                            ListVTicket.Items.Add(itemTicket);
+                            itemTicket.SubItems.Add(selectedProduct.Price.ToString());
+                            itemTicket.SubItems.Add(quantityToSell.ToString());
+                            itemTicket.SubItems.Add(mark); // Assuming discount is 0
+                            itemTicket.SubItems.Add(Convert.ToString(CalculateTotalResult(selectedProduct, quantityToSell)));
+                        }
+
+                        
 
                         // Update product stock
                         selectedProduct.ReduceStock((quantityToSell));
@@ -122,6 +162,7 @@ namespace inventor_manager
 
                         // Update product file
                         UpdateProductFile();
+
 
                     }
                     else
@@ -155,10 +196,22 @@ namespace inventor_manager
 
         }
 
-        private int CalculateTotalResult(Product_Sale selectedProduct, int quantityToSell)
+
+
+        private double CalculateTotalResult(Product_Sale selectedProduct, int quantityToSell, double discountPercentage = 0)
         {
-            int totalResult = (int)(selectedProduct.Price * quantityToSell);
-            return totalResult;
+            if (selectedProduct is DiscountedProduct_Sale discountedProduct)
+            {
+                // Calculate total result with discount
+                double totalResult = (double)(discountedProduct.GetDiscountedPrice() * quantityToSell);
+                return totalResult;
+            }
+            else
+            {
+                // Calculate total result for regular product
+                double totalResult = (double)(selectedProduct.Price * quantityToSell);
+                return totalResult;
+            }
         }
 
 
@@ -450,20 +503,48 @@ namespace inventor_manager
 
                 // Extraer la información del producto
                 string productName = selectedItem.Text;
-                int prodct_price = Convert.ToInt32(selectedItem.SubItems[4].Text);
+                int productQuantity = Convert.ToInt32(selectedItem.SubItems[2].Text);
+                double productPrice = Convert.ToDouble(selectedItem.SubItems[1].Text);
+                double productTotalPrice = Convert.ToDouble(selectedItem.SubItems[4].Text);
 
                 // Eliminar el elemento seleccionado del ListView
                 ListVTicket.Items.Remove(selectedItem);
 
                 // Actualizar el total a pagar
                 double currentTotal = Convert.ToDouble(LblResult.Text.Replace("$", ""));
-                resultFinish = Convert.ToInt32(currentTotal - prodct_price);
+                resultFinish = Convert.ToInt32(currentTotal - productTotalPrice);
                 LblResult.Text = Convert.ToString(resultFinish);
+
+                // Encontrar el producto en LstViewDataProductos y actualizar su stock
+                foreach (ListViewItem item in LstViewDataProductos.Items)
+                {
+                    if (item.Text == productName)
+                    {
+                        int currentStock = Convert.ToInt32(item.SubItems[2].Text);
+                        int updatedStock = currentStock + productQuantity;
+                        item.SubItems[2].Text = updatedStock.ToString();
+                        break;
+                    }
+                }
+
+                // Actualizar el stock del producto seleccionado solo si no es un producto con descuento
+                if (!(selectedItem.Tag is DiscountedProduct_Sale))
+                {
+                    selectedProduct.IncreaseStock(productQuantity);
+                    selectedProductStock += productQuantity;
+                }
+
+                // Actualizar el archivo de productos
+                UpdateProductFile();
+
+                // Actualizar la interfaz gráfica de usuario
+                ListVTicket.Refresh();
+                LstViewDataProductos.Refresh();
 
             }
             else
             {
-                MessageBox.Show("Seleccione un ítem para eliminar. No puede estar vacio");
+                MessageBox.Show("Seleccione un ítem para eliminar. No puede estar vacío.");
             }
         }
 
