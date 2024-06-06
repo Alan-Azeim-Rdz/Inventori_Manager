@@ -103,10 +103,7 @@ namespace inventor_manager
                                 bool isDuplicate = false;
                                 foreach (ListViewItem item in ListViewDataProduct.Items)
                                 {
-                                    if (item.Text == Name_without_spaces &&
-                                        item.SubItems[1].Text == TxtPrice.Text &&
-                                        item.SubItems[2].Text == TxtQuanity.Text &&
-                                        item.SubItems[3].Text == Mark_without_spaces)
+                                    if (item.Text == Name_without_spaces && item.SubItems[1].Text == TxtPrice.Text && item.SubItems[2].Text == TxtQuanity.Text && item.SubItems[3].Text == Mark_without_spaces)
                                     {
                                         isDuplicate = true;
                                         break;
@@ -120,7 +117,7 @@ namespace inventor_manager
                                     {
                                         ListViewDataProduct.Items.Add(NewItemLstData);
 
-                                        Product producto = new Product(Convert.ToInt32(TxtPrice.Text), Convert.ToInt32(TxtQuanity.Text), TxtMark.Text);
+                                        Product producto = new Product(Convert.ToDouble(TxtPrice.Text), Convert.ToInt32(TxtQuanity.Text), TxtMark.Text);
 
                                         NewItemLstData.SubItems.Add(Convert.ToString(producto.Price));
                                         NewItemLstData.SubItems.Add(Convert.ToString(producto.Quantity));

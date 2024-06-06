@@ -9,11 +9,11 @@ namespace inventor_manager
 {
     internal class Product
     {
-        protected int _price;
+        protected double _price;
         protected int _quantity;
         protected string _mark;
 
-        public int Price
+        public double Price
         {
             get { return _price; }
             set { _price = value; }
@@ -36,7 +36,7 @@ namespace inventor_manager
             _mark = "";
         }
 
-        public Product(int price, int quantity, string mark)
+        public Product(double price, int quantity, string mark)
         {
            _price = price;
            _quantity = quantity;
