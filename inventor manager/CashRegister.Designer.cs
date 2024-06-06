@@ -34,6 +34,7 @@
             Price = new ColumnHeader();
             columnHeader2 = new ColumnHeader();
             columnHeader3 = new ColumnHeader();
+            columnHeader9 = new ColumnHeader();
             LblSelection = new Label();
             TxtQuantity = new TextBox();
             LblTotal = new Label();
@@ -64,10 +65,10 @@
             // 
             // LstViewDataProductos
             // 
-            LstViewDataProductos.Columns.AddRange(new ColumnHeader[] { columnHeader1, Price, columnHeader2, columnHeader3 });
-            LstViewDataProductos.Location = new Point(595, 12);
+            LstViewDataProductos.Columns.AddRange(new ColumnHeader[] { columnHeader1, Price, columnHeader2, columnHeader3, columnHeader9 });
+            LstViewDataProductos.Location = new Point(683, 24);
             LstViewDataProductos.Name = "LstViewDataProductos";
-            LstViewDataProductos.Size = new Size(505, 486);
+            LstViewDataProductos.Size = new Size(631, 486);
             LstViewDataProductos.TabIndex = 4;
             LstViewDataProductos.UseCompatibleStateImageBehavior = false;
             LstViewDataProductos.View = View.Details;
@@ -97,10 +98,15 @@
             columnHeader3.TextAlign = HorizontalAlignment.Center;
             columnHeader3.Width = 120;
             // 
+            // columnHeader9
+            // 
+            columnHeader9.Text = "expiration date";
+            columnHeader9.Width = 140;
+            // 
             // LblSelection
             // 
             LblSelection.Font = new Font("Segoe UI Black", 9F);
-            LblSelection.Location = new Point(113, 63);
+            LblSelection.Location = new Point(159, 71);
             LblSelection.Name = "LblSelection";
             LblSelection.Size = new Size(336, 35);
             LblSelection.TabIndex = 5;
@@ -109,7 +115,7 @@
             // 
             // TxtQuantity
             // 
-            TxtQuantity.Location = new Point(209, 117);
+            TxtQuantity.Location = new Point(255, 125);
             TxtQuantity.Name = "TxtQuantity";
             TxtQuantity.Size = new Size(151, 23);
             TxtQuantity.TabIndex = 7;
@@ -138,7 +144,7 @@
             ListVTicket.Columns.AddRange(new ColumnHeader[] { columnHeader4, columnHeader5, columnHeader6, columnHeader7, columnHeader8 });
             ListVTicket.Location = new Point(12, 221);
             ListVTicket.Name = "ListVTicket";
-            ListVTicket.Size = new Size(549, 229);
+            ListVTicket.Size = new Size(628, 229);
             ListVTicket.TabIndex = 10;
             ListVTicket.UseCompatibleStateImageBehavior = false;
             ListVTicket.View = View.Details;
@@ -184,7 +190,7 @@
             // 
             // BtnAdd
             // 
-            BtnAdd.Location = new Point(244, 155);
+            BtnAdd.Location = new Point(290, 163);
             BtnAdd.Name = "BtnAdd";
             BtnAdd.Size = new Size(75, 23);
             BtnAdd.TabIndex = 12;
@@ -194,7 +200,7 @@
             // 
             // BtnTicketJason
             // 
-            BtnTicketJason.Location = new Point(654, 516);
+            BtnTicketJason.Location = new Point(680, 514);
             BtnTicketJason.Name = "BtnTicketJason";
             BtnTicketJason.Size = new Size(103, 47);
             BtnTicketJason.TabIndex = 13;
@@ -204,7 +210,7 @@
             // 
             // BtnTicketExcel
             // 
-            BtnTicketExcel.Location = new Point(774, 516);
+            BtnTicketExcel.Location = new Point(800, 514);
             BtnTicketExcel.Name = "BtnTicketExcel";
             BtnTicketExcel.Size = new Size(116, 47);
             BtnTicketExcel.TabIndex = 14;
@@ -214,7 +220,7 @@
             // 
             // BtnPdfTicket
             // 
-            BtnPdfTicket.Location = new Point(904, 518);
+            BtnPdfTicket.Location = new Point(930, 516);
             BtnPdfTicket.Name = "BtnPdfTicket";
             BtnPdfTicket.Size = new Size(116, 47);
             BtnPdfTicket.TabIndex = 15;
@@ -224,7 +230,7 @@
             // 
             // BtnRemove
             // 
-            BtnRemove.Location = new Point(486, 464);
+            BtnRemove.Location = new Point(113, 542);
             BtnRemove.Name = "BtnRemove";
             BtnRemove.Size = new Size(75, 23);
             BtnRemove.TabIndex = 16;
@@ -236,7 +242,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1112, 577);
+            ClientSize = new Size(1337, 577);
             Controls.Add(BtnRemove);
             Controls.Add(BtnPdfTicket);
             Controls.Add(BtnTicketExcel);
@@ -281,5 +287,6 @@
         private Button BtnPdfTicket;
         private ColumnHeader columnHeader8;
         private Button BtnRemove;
+        private ColumnHeader columnHeader9;
     }
 }

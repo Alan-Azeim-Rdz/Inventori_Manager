@@ -125,6 +125,7 @@ namespace inventor_manager
                             itemDiscounted.SubItems.Add(quantityToSell.ToString());
                             itemDiscounted.SubItems.Add(mark); // Assuming discount is 0
                             itemDiscounted.SubItems.Add(Convert.ToString(discountedTotal));
+                            itemDiscounted.SubItems.Add(selectedItem.SubItems[4].Text);
 
 
                         }
@@ -181,7 +182,7 @@ namespace inventor_manager
                     foreach (ListViewItem item in LstViewDataProductos.Items)
                     {
                         // Construir una cadena con todos los datos del elemento separados por espacios
-                        string line = $"{item.Text} {item.SubItems[1].Text} {item.SubItems[2].Text} {item.SubItems[3].Text}";
+                        string line = $"{item.Text} {item.SubItems[1].Text} {item.SubItems[2].Text} {item.SubItems[3].Text} {item.SubItems[4].Text}";
                         writer.WriteLine(line); // Escribir la línea en el archivo
                     }
                 }
@@ -226,12 +227,10 @@ namespace inventor_manager
                     // Leer todas las líneas del archivo
                     string[] lines = File.ReadAllLines(Url_txt_productos);
 
-                    // Crear una lista para almacenar los datos actualizados del producto
-                    List<string> updatedLines = new List<string>();
-
                     // Procesar cada línea
-                    foreach (string line in lines)
+                    for (int i = 0; i < lines.Length; i++)
                     {
+                        string line = lines[i];
                         string[] parts = line.Split(' ');
                         string nombreProducto = parts[0];
 
@@ -241,13 +240,12 @@ namespace inventor_manager
                             parts[2] = selectedProductStock.ToString(); // Actualizar valor de stock
                         }
 
-                        // Construir la línea actualizada
-                        string updatedLine = string.Join(" ", parts);
-                        updatedLines.Add(updatedLine);
+                        // Reconstruir la línea actualizada
+                        lines[i] = string.Join(" ", parts);
                     }
 
                     // Escribir los datos actualizados en el archivo
-                    File.WriteAllLines(Url_txt_productos, updatedLines);
+                    File.WriteAllLines(Url_txt_productos, lines);
                 }
             }
             catch (Exception ex)

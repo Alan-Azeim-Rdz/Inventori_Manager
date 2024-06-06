@@ -47,15 +47,18 @@
             ComBoxElection = new ComboBox();
             BtnQuantityProductTotal = new Button();
             BtnCancel = new Button();
+            CheckBoxPerecedero = new CheckBox();
+            TxtExpirationDate = new TextBox();
+            expirationdate = new ColumnHeader();
             ((System.ComponentModel.ISupportInitialize)PictureUser).BeginInit();
             SuspendLayout();
             // 
             // ListViewDataProduct
             // 
-            ListViewDataProduct.Columns.AddRange(new ColumnHeader[] { Name, columnHeader1, columnHeader2, columnHeader3 });
+            ListViewDataProduct.Columns.AddRange(new ColumnHeader[] { Name, columnHeader1, columnHeader2, columnHeader3, expirationdate });
             ListViewDataProduct.Location = new Point(12, 12);
             ListViewDataProduct.Name = "ListViewDataProduct";
-            ListViewDataProduct.Size = new Size(485, 462);
+            ListViewDataProduct.Size = new Size(612, 462);
             ListViewDataProduct.TabIndex = 1;
             ListViewDataProduct.UseCompatibleStateImageBehavior = false;
             ListViewDataProduct.View = View.Details;
@@ -87,7 +90,7 @@
             // 
             // PictureUser
             // 
-            PictureUser.Location = new Point(1056, 12);
+            PictureUser.Location = new Point(1211, 12);
             PictureUser.Name = "PictureUser";
             PictureUser.Size = new Size(55, 49);
             PictureUser.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -97,7 +100,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(549, 145);
+            label3.Location = new Point(704, 145);
             label3.Name = "label3";
             label3.Size = new Size(34, 15);
             label3.TabIndex = 18;
@@ -105,7 +108,7 @@
             // 
             // TxtMark
             // 
-            TxtMark.Location = new Point(691, 145);
+            TxtMark.Location = new Point(846, 145);
             TxtMark.Name = "TxtMark";
             TxtMark.Size = new Size(133, 23);
             TxtMark.TabIndex = 17;
@@ -113,7 +116,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(549, 107);
+            label2.Location = new Point(704, 107);
             label2.Name = "label2";
             label2.Size = new Size(53, 15);
             label2.TabIndex = 16;
@@ -121,7 +124,7 @@
             // 
             // TxtQuanity
             // 
-            TxtQuanity.Location = new Point(691, 107);
+            TxtQuanity.Location = new Point(846, 107);
             TxtQuanity.Name = "TxtQuanity";
             TxtQuanity.Size = new Size(133, 23);
             TxtQuanity.TabIndex = 15;
@@ -129,7 +132,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(549, 73);
+            label1.Location = new Point(704, 73);
             label1.Name = "label1";
             label1.Size = new Size(119, 15);
             label1.TabIndex = 14;
@@ -137,7 +140,7 @@
             // 
             // TxtPrice
             // 
-            TxtPrice.Location = new Point(691, 73);
+            TxtPrice.Location = new Point(846, 73);
             TxtPrice.Name = "TxtPrice";
             TxtPrice.Size = new Size(133, 23);
             TxtPrice.TabIndex = 13;
@@ -145,7 +148,7 @@
             // LblName
             // 
             LblName.AutoSize = true;
-            LblName.Location = new Point(549, 36);
+            LblName.Location = new Point(704, 36);
             LblName.Name = "LblName";
             LblName.Size = new Size(125, 15);
             LblName.TabIndex = 12;
@@ -153,14 +156,14 @@
             // 
             // TxtAddName
             // 
-            TxtAddName.Location = new Point(691, 36);
+            TxtAddName.Location = new Point(846, 36);
             TxtAddName.Name = "TxtAddName";
             TxtAddName.Size = new Size(133, 23);
             TxtAddName.TabIndex = 11;
             // 
             // BtnDelete
             // 
-            BtnDelete.Location = new Point(934, 188);
+            BtnDelete.Location = new Point(1089, 188);
             BtnDelete.Name = "BtnDelete";
             BtnDelete.Size = new Size(89, 33);
             BtnDelete.TabIndex = 20;
@@ -170,7 +173,7 @@
             // 
             // Btnaccept
             // 
-            Btnaccept.Location = new Point(892, 137);
+            Btnaccept.Location = new Point(1047, 137);
             Btnaccept.Name = "Btnaccept";
             Btnaccept.Size = new Size(89, 37);
             Btnaccept.TabIndex = 21;
@@ -182,14 +185,14 @@
             // 
             ComBoxElection.FormattingEnabled = true;
             ComBoxElection.Items.AddRange(new object[] { "Add", "Edit" });
-            ComBoxElection.Location = new Point(916, 99);
+            ComBoxElection.Location = new Point(1075, 89);
             ComBoxElection.Name = "ComBoxElection";
             ComBoxElection.Size = new Size(121, 23);
             ComBoxElection.TabIndex = 22;
             // 
             // BtnQuantityProductTotal
             // 
-            BtnQuantityProductTotal.Location = new Point(503, 441);
+            BtnQuantityProductTotal.Location = new Point(658, 441);
             BtnQuantityProductTotal.Name = "BtnQuantityProductTotal";
             BtnQuantityProductTotal.Size = new Size(195, 33);
             BtnQuantityProductTotal.TabIndex = 23;
@@ -199,7 +202,7 @@
             // 
             // BtnCancel
             // 
-            BtnCancel.Location = new Point(987, 139);
+            BtnCancel.Location = new Point(1142, 139);
             BtnCancel.Name = "BtnCancel";
             BtnCancel.Size = new Size(89, 33);
             BtnCancel.TabIndex = 24;
@@ -207,11 +210,35 @@
             BtnCancel.UseVisualStyleBackColor = true;
             BtnCancel.Click += BtnCancel_Click;
             // 
+            // CheckBoxPerecedero
+            // 
+            CheckBoxPerecedero.AutoSize = true;
+            CheckBoxPerecedero.Location = new Point(704, 188);
+            CheckBoxPerecedero.Name = "CheckBoxPerecedero";
+            CheckBoxPerecedero.Size = new Size(85, 19);
+            CheckBoxPerecedero.TabIndex = 25;
+            CheckBoxPerecedero.Text = "Perecedero";
+            CheckBoxPerecedero.UseVisualStyleBackColor = true;
+            // 
+            // TxtExpirationDate
+            // 
+            TxtExpirationDate.Location = new Point(846, 184);
+            TxtExpirationDate.Name = "TxtExpirationDate";
+            TxtExpirationDate.Size = new Size(133, 23);
+            TxtExpirationDate.TabIndex = 26;
+            // 
+            // expirationdate
+            // 
+            expirationdate.Text = "expiration date";
+            expirationdate.Width = 140;
+            // 
             // Edit_Inventory
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1123, 503);
+            ClientSize = new Size(1278, 503);
+            Controls.Add(TxtExpirationDate);
+            Controls.Add(CheckBoxPerecedero);
             Controls.Add(BtnCancel);
             Controls.Add(BtnQuantityProductTotal);
             Controls.Add(ComBoxElection);
@@ -253,5 +280,8 @@
         private ComboBox ComBoxElection;
         private Button BtnQuantityProductTotal;
         private Button BtnCancel;
+        private CheckBox CheckBoxPerecedero;
+        private TextBox TxtExpirationDate;
+        private ColumnHeader expirationdate;
     }
 }
