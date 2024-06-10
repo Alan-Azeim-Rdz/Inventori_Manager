@@ -125,9 +125,10 @@ namespace inventor_manager
                                         if (CheckBoxPerecedero.Checked)
                                         {
                                             DateTime expirationDate;
-                                            if (DateTime.TryParse(TxtExpirationDate.Text, out expirationDate))
+
+                                            if (DateTime.TryParse(DataTimeExpirationDate.Text, out expirationDate))
                                             {
-                                                producto = new Perishable(Convert.ToDouble(TxtPrice.Text), Convert.ToInt32(TxtQuanity.Text), TxtMark.Text, expirationDate);
+                                                producto = new Perishable(Convert.ToDouble(TxtPrice.Text), Convert.ToInt32(TxtQuanity.Text), TxtMark.Text, Convert.ToDateTime( DataTimeExpirationDate.Text.Replace("-","/")));
                                             }
                                             else
                                             {
@@ -188,7 +189,7 @@ namespace inventor_manager
                             TxtMark.Clear();
                             TxtPrice.Clear();
                             TxtQuanity.Clear();
-                            TxtExpirationDate.Clear();
+                            DataTimeExpirationDate.ResetText();
                             break;
 
                         case "Edit":
@@ -210,7 +211,7 @@ namespace inventor_manager
                                     selectedItem.SubItems[3].Text = TxtMark.Text;
 
                                     // Verificar si el producto es perecedero y actualizar la fecha de caducidad
-                                    string expirationDateText = CheckBoxPerecedero.Checked ? TxtExpirationDate.Text : "N/A";
+                                    string expirationDateText = CheckBoxPerecedero.Checked ? DataTimeExpirationDate.Text : "N/A";
                                     selectedItem.SubItems[4].Text = expirationDateText;
 
                                     using (StreamWriter writer = new StreamWriter(Url_txt_productos))
@@ -324,12 +325,11 @@ namespace inventor_manager
                 if (!string.IsNullOrEmpty(expirationDateText) && expirationDateText != "N/A")
                 {
                     CheckBoxPerecedero.Checked = true;
-                    TxtExpirationDate.Text = expirationDateText;
+                    DataTimeExpirationDate.Text = expirationDateText;
                 }
                 else
                 {
                     CheckBoxPerecedero.Checked = false;
-                    TxtExpirationDate.Text = "N/A"; // Establece "N/A" como valor predeterminado
                 }
 
                 ListViewDataProduct.Enabled = false;
@@ -386,6 +386,11 @@ namespace inventor_manager
             TxtMark.Clear();
             TxtPrice.Clear();
             TxtQuanity.Clear();
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
