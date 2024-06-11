@@ -72,8 +72,6 @@ namespace inventor_manager
         {
             try
             {
-
-
                 if (ComBoxElection.SelectedItem == null)
                 {
                     MessageBox.Show("Por favor selecciona una acción en la caja de ítems");
@@ -81,14 +79,11 @@ namespace inventor_manager
                 }
                 else
                 {
-
                     string selection = ComBoxElection.SelectedItem.ToString();
 
                     switch (selection)
                     {
                         case "Add":
-
-
                             if (ListViewDataProduct.SelectedItems.Count > 0)
                             {
                                 MessageBox.Show("No puedes agregar un nuevo producto mientras estás editando.");
@@ -115,64 +110,57 @@ namespace inventor_manager
 
                                 if (!isDuplicate)
                                 {
-                                    ListViewItem NewItemLstData = new ListViewItem(Name_without_spaces);
-                                    try
+                                    IProduct producto;
+
+                                    if (CheckBoxPerecedero.Checked)
                                     {
-                                        ListViewDataProduct.Items.Add(NewItemLstData);
+                                        DateTime expirationDate;
 
-                                        IProduct producto;
-
-                                        if (CheckBoxPerecedero.Checked)
+                                        if (DateTime.TryParse(DataTimeExpirationDate.Text, out expirationDate))
                                         {
-                                            DateTime expirationDate;
-
-                                            if (DateTime.TryParse(DataTimeExpirationDate.Text, out expirationDate))
+                                            if (expirationDate < DateTime.Today)
                                             {
-                                                producto = new Perishable(Convert.ToDouble(TxtPrice.Text), Convert.ToInt32(TxtQuanity.Text), TxtMark.Text, Convert.ToDateTime( DataTimeExpirationDate.Text.Replace("-","/")));
-                                            }
-                                            else
-                                            {
-                                                MessageBox.Show("Fecha de caducidad inválida");
+                                                MessageBox.Show("La fecha de caducidad no puede ser anterior a la fecha actual.");
                                                 return;
                                             }
+
+                                            producto = new Perishable(Convert.ToDouble(TxtPrice.Text), Convert.ToInt32(TxtQuanity.Text), TxtMark.Text, expirationDate);
                                         }
                                         else
                                         {
-                                            producto = new Not_Perishable(Convert.ToDouble(TxtPrice.Text), Convert.ToInt32(TxtQuanity.Text), TxtMark.Text);
-                                        }
-
-                                        NewItemLstData.SubItems.Add(Convert.ToString(producto.Price));
-                                        NewItemLstData.SubItems.Add(Convert.ToString(producto.Quantity));
-                                        NewItemLstData.SubItems.Add(Mark_without_spaces);
-
-                                        if (producto is Perishable)
-                                        {
-                                            NewItemLstData.SubItems.Add(((Perishable)producto).ExpirationDate.ToString("yyyy-MM-dd"));
-                                        }
-                                        else
-                                        {
-                                            NewItemLstData.SubItems.Add("N/A");
-                                        }
-
-                                        string product_for_txt = Name_without_spaces + " " + producto.ToString() + " N/A";
-                                        try
-                                        {
-                                            File.AppendAllText(Url_txt_productos, product_for_txt + Environment.NewLine);
-                                        }
-                                        catch (Exception ex)
-                                        {
-                                            MessageBox.Show("Error al guardar el archivo: " + ex.Message);
+                                            MessageBox.Show("Fecha de caducidad inválida");
+                                            return;
                                         }
                                     }
-                                    catch (System.InvalidCastException)
+                                    else
                                     {
-                                        ListViewDataProduct.Items.Remove(NewItemLstData);
-                                        MessageBox.Show("Alguno de los datos enviados está mal. Por favor verifique su escritura");
+                                        producto = new Not_Perishable(Convert.ToDouble(TxtPrice.Text), Convert.ToInt32(TxtQuanity.Text), TxtMark.Text);
                                     }
-                                    catch (System.FormatException)
+
+                                    ListViewItem NewItemLstData = new ListViewItem(Name_without_spaces);
+                                    ListViewDataProduct.Items.Add(NewItemLstData);
+
+                                    NewItemLstData.SubItems.Add(Convert.ToString(producto.Price));
+                                    NewItemLstData.SubItems.Add(Convert.ToString(producto.Quantity));
+                                    NewItemLstData.SubItems.Add(Mark_without_spaces);
+
+                                    if (producto is Perishable)
                                     {
-                                        ListViewDataProduct.Items.Remove(NewItemLstData);
-                                        MessageBox.Show("Alguno de los datos enviados está mal. Por favor verifique su escritura");
+                                        NewItemLstData.SubItems.Add(((Perishable)producto).ExpirationDate.ToString("yyyy-MM-dd"));
+                                    }
+                                    else
+                                    {
+                                        NewItemLstData.SubItems.Add("N/A");
+                                    }
+
+                                    string product_for_txt = Name_without_spaces + " " + producto.ToString() + " N/A";
+                                    try
+                                    {
+                                        File.AppendAllText(Url_txt_productos, product_for_txt + Environment.NewLine);
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        MessageBox.Show("Error al guardar el archivo: " + ex.Message);
                                     }
                                 }
                                 else
@@ -193,39 +181,32 @@ namespace inventor_manager
                             break;
 
                         case "Edit":
-
                             ListViewDataProduct.Enabled = true;
                             if (!string.IsNullOrEmpty(TxtAddName.Text) && !string.IsNullOrEmpty(TxtPrice.Text) && !string.IsNullOrEmpty(TxtQuanity.Text) && !string.IsNullOrEmpty(TxtMark.Text))
                             {
                                 if (ListViewDataProduct.SelectedItems.Count > 0)
                                 {
-                                    // Obtener el elemento seleccionado
                                     string Name_without_spaces = TxtAddName.Text.Replace(" ", "-");
                                     string Mark_without_spaces = TxtMark.Text.Replace(" ", "-");
                                     var selectedItem = ListViewDataProduct.SelectedItems[0];
 
-                                    // Actualizar los valores en los subitems del elemento seleccionado
                                     selectedItem.Text = Name_without_spaces;
                                     selectedItem.SubItems[1].Text = TxtPrice.Text;
                                     selectedItem.SubItems[2].Text = TxtQuanity.Text;
                                     selectedItem.SubItems[3].Text = TxtMark.Text;
 
-                                    // Verificar si el producto es perecedero y actualizar la fecha de caducidad
                                     string expirationDateText = CheckBoxPerecedero.Checked ? DataTimeExpirationDate.Text : "N/A";
                                     selectedItem.SubItems[4].Text = expirationDateText;
 
                                     using (StreamWriter writer = new StreamWriter(Url_txt_productos))
                                     {
-                                        // Recorre los elementos del ListView y escribe cada dato en una línea
                                         foreach (ListViewItem item in ListViewDataProduct.Items)
                                         {
-                                            // Construir una cadena con todos los datos del elemento separados por espacios
                                             string line = $"{item.Text} {item.SubItems[1].Text} {item.SubItems[2].Text} {item.SubItems[3].Text} {item.SubItems[4].Text}";
                                             writer.WriteLine(line);
                                         }
                                     }
 
-                                    // Opcionalmente, puedes mostrar un mensaje de confirmación
                                     MessageBox.Show("El producto ha sido actualizado correctamente.");
                                 }
                                 else
@@ -242,13 +223,9 @@ namespace inventor_manager
                             TxtMark.Clear();
                             TxtPrice.Clear();
                             TxtQuanity.Clear();
-
                             break;
                     }
-
-
                 }
-
             }
             catch (Exception)
             {
