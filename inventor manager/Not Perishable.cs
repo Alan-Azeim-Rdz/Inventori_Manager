@@ -19,9 +19,11 @@ namespace inventor_manager
             Mark = mark;
         }
 
+        
+
         public override string ToString()
         {
-            return Price + " " + Quantity + " " + Mark.Replace(" ", "-");
+            return Price + " " + Quantity + " " + Mark.Replace(" ", "-"); ;
         }
 
     }

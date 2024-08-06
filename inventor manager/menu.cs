@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 namespace inventor_manager
 {
+    
     public partial class menu : Form
     {
         public menu()
@@ -25,6 +26,7 @@ namespace inventor_manager
                 _receivedImage = value;
                 PictureImagePhoto.Image = _receivedImage;
             }
+            
         }
 
         private void BtnSouldProduct_Click(object sender, EventArgs e)
